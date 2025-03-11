@@ -25,6 +25,10 @@ const Products: React.FC = () => {
     navigate(`/products/delete/${id}`);
   }
 
+  const generateReport = () => {
+    navigate(`/products/reports/to-excel`);
+  }
+
   useEffect(() => {
     const fetchProducts = async () => {
       const getProducts: string = config.getProducts;
@@ -56,6 +60,7 @@ const Products: React.FC = () => {
           <div className={style[ 'page-label' ]}>Products list</div>
           <div className={style[ 'sub-menu' ]} >
             <button onClick={createProducts}>Create</button>
+            <button onClick={generateReport}>XSLX</button>
           </div>
           <div className={style[ 'products-cards' ]}>
             <ul>
@@ -65,9 +70,8 @@ const Products: React.FC = () => {
                     alt={product.description}
                     onClick={() => handleClick(product?._id)} />
                   <p>Name: {product.name}</p>
-                  <p>Price: {product.price}</p>
                   <p>Brand: {product.brand}</p>
-                  <p>Stock: {product.stock}</p>
+                  <p>Price: ${product.price}</p>
                   <button onClick={() => updateProduct(product?._id)}>Update</button>
                   <button onClick={() => deleteProduct(product?._id)}>Delete</button>
                   <button>Add to the car</button>

@@ -10,7 +10,7 @@
     overflow: auto;
 
     & .page-label {
-        font-size: 15pt;
+        font-size: 12pt;
         font-weight: 8pt;
         margin: 1rem 1rem 0 1rem;
         background-image: linear-gradient(88deg, #09efff, 50%, #ff1f57 100%);
@@ -19,9 +19,9 @@
     }
 
     & button {
-        background-color: var(--darkModeBackgroundContrast);
-        color: var();
-        font-weight: 600;
+        background-color: var(--darkModeBody);
+        color: var(--darkModeBody);
+        font-weight: 500;
         width: 8rem;
         margin: 0.5rem;
         padding: 0.5rem;
@@ -35,14 +35,21 @@
 
     & .products-cards {
         color: var(--darkModeText);
+        align-items: center;
+    
 
         & ul {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            font-size: 10pt;
+            grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
             padding: 1rem;
             max-width: 100%;
 
             & li {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: auto;
                 background-color: var(--offDarkModeBackground);
                 margin: 1rem;
                 padding: 1rem;
@@ -53,9 +60,9 @@
 
                 & img {
                     border-radius: 1rem;
-                    margin: 0.3rem;
-                    width: 150px;
-                    height: 150px;
+                    width: auto;
+                    max-width: 100%;
+                    height: 11rem;
                     cursor: pointer;
                 }
             }

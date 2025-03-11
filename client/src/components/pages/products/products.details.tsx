@@ -5,11 +5,24 @@ import { config } from "../../../config";
 import { IProducts } from "../../../types/interface.products";
 
 const Details: React.FC = () => {
+    const initialState: IProducts = ({
+        name: '',
+        description: '',
+        price: 0,
+        category: '',
+        brand: '',
+        stock: 0,
+        images: [ '' ],
+        attributes: {},
+        rating: undefined,
+        reviews: [],
+    });
+
     const { id } = useParams<{ id: string }>();
-    const getProducts: string = config.getProducts || 'http://localhost:3001/api/v1/get-products';
-    const URL = `${getProducts}/${id}`;
+    const getProducts: string = config.getProducts;
+    const URL = `${'http://localhost:3001/api/v1/get-products'}/${id}`;
     const [ error, setError ] = useState<string | null>(null);
-    const [ productDetailed, setProductDetailed ] = useState<IProducts>();
+    const [ productDetailed, setProductDetailed ] = useState<IProducts>(initialState);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -37,12 +50,18 @@ const Details: React.FC = () => {
 
     return (
         <div className={style[ 'products-details' ]}>
-            <p>product id: {productDetailed?._id}</p>
             <img src={productDetailed?.images ? productDetailed.images[ 0 ] : undefined}
                 alt={productDetailed?.description}
                 width={500} height={500} />
-            <p>price: {productDetailed?.price}</p>
-            <button onClick={handleClick}>Back</button>
+            <div className={style[ 'details' ]}>
+                <p>_id: {productDetailed?._id}</p>
+                <p>Brand: {productDetailed?.brand}</p>
+                <p>Category: {productDetailed?.category}</p>
+                <p>Description: {productDetailed?.description}</p>
+                <p>Price: ${productDetailed?.price}</p>
+                <p>rating: {productDetailed?.rating}</p>
+                <button onClick={handleClick}>Back</button>
+            </div>
         </div>
     );
 }

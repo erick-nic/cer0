@@ -10,6 +10,7 @@ import Details from "../pages/products/products.details"
 import Create from "../pages/products/products.create";
 import Users from "../pages/users";
 import Shop from "../pages/shop";
+import Report from "../pages/products/reports/to-exel";
 
 const router = createBrowserRouter([ {
     path: "/",
@@ -27,6 +28,10 @@ const router = createBrowserRouter([ {
                 {
                     path: "create/",
                     element: <Create />
+                },
+                {
+                    path: "reports/to-excel/",
+                    element: <Report />
                 }
             ]
         },

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IProducts } from "../../../types/interface.products";
 import { config } from "../../../config";
 import { TErrors } from "../../../types/type.error";
 import style from "../../../styles/products/create.module.css"
 import { useNavigate } from "react-router-dom";
 import { X } from 'lucide-react';
-
+import ICategory from "../../../types/interface.category";
 
 const Create: React.FC = () => {
     const initialState: IProducts = ({
@@ -24,14 +24,32 @@ const Create: React.FC = () => {
     const [ data, setData ] = useState<IProducts>(initialState);
     const [ error, setError ] = useState<TErrors[ 'products' ]>({});
     const [ response, setResponse ] = useState<string>('');
+    const [ categories, setCategories ] = useState<ICategory[]>([]);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const getProducts: string = config.getProducts;
+            try {
+                const response = await fetch('http://localhost:3001/api/v3/get-categories');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data: ICategory[] = await response.json();
+                setCategories(data);
+            } catch (error) {
+                setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            }
+        }
+
+        fetchProducts();
+    }, []);
     const handleCancel = () => {
         navigate('/products');
     };
 
     const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
         setData((prev) => ({
@@ -82,6 +100,8 @@ const Create: React.FC = () => {
             });
             const resData = await res.json();
             setResponse(resData.message);
+            alert(resData.message);
+            navigate('/products');
         } catch (error) {
             console.error(error);
         }
@@ -119,14 +139,19 @@ const Create: React.FC = () => {
                     required
                 />
                 <p>Category</p>
-                <input
-                    type="text"
+                <select
                     name="category"
-                    placeholder="Category"
                     value={data.category}
                     onChange={handleChange}
                     required
-                />
+                >
+                    <option value="">Select a category</option>
+                    {categories.map((category) => (
+                        <option key={category._id} value={category._id}>
+                            {category.name}
+                        </option>
+                    ))}
+                </select>
                 <p>Brand</p>
                 <input
                     type="text"

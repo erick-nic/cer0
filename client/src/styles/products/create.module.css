@@ -1,11 +1,13 @@
 @import '../App.module.css';
 
 .create-products {
-    width: 300px;
+    display: flex;
+    flex-direction: column;
+    width: 23rem;
     font-size: 11pt;
     background-color: var(--darkModeBackground);
-    border-left: 1px solid #ddd;
-    padding: 1rem;
+    border-left: 0.2rem solid var(--darkModeBackground);
+    padding: 3rem;
     position: absolute;
     top: 0;
     right: 0;

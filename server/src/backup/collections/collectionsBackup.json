@@ -1,0 +1,26 @@
+{
+  "categories": [],
+  "users": [
+    {
+      "_id": "67cb7544e623b291202e3193",
+      "name": "erick",
+      "email": "erick.salgado.en@gmail.com",
+      "password": "$2b$08$UV0alw5EB6tD7AITIAgY/OgcKiVGxRctNx2SjH7g0alBV4dhNfpfu",
+      "address": {
+        "street": "",
+        "city": "",
+        "state": "",
+        "postalCode": ""
+      },
+      "phone": "85630764",
+      "orders": [],
+      "role": "admin",
+      "createdAt": "2025-03-07T22:37:56.557Z",
+      "updatedAt": "2025-03-07T22:37:56.557Z",
+      "__v": 0
+    }
+  ],
+  "orders": [],
+  "carts": [],
+  "products": []
+}

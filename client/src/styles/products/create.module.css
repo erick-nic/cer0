@@ -1,0 +1,77 @@
+@import '../App.module.css';
+
+.create-products {
+    width: 300px;
+    font-size: 11pt;
+    background-color: var(--darkModeBackground);
+    border-left: 1px solid #ddd;
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+
+    .close {
+        position: absolute; 
+        top: 0;
+        right: 0;
+        font-size: 1.5rem;
+        padding: 1rem;
+        cursor: pointer;
+    }
+
+    & textarea {
+        color: var(--darkModeText);
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: none;
+        background-color: var(--darkModeBody);
+        transition: 3.8rem 0.5s ease-in;
+        width: 13rem;
+        max-width: 100vh;
+
+        &:focus {
+            outline: none;
+            border: 0.2em solid var(--focusDarkMode);
+        }
+    }
+
+    & input {
+        color: var(--darkModeText);
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: none;
+        background-color: var(--darkModeBody);
+        transition: 3.8rem 0.5s ease-in;
+        width: 13rem;
+
+        &:focus {
+            outline: none;
+            border: 0.2em solid var(--focusDarkMode);
+        }
+    }
+
+    & button {
+        background-color: var(--darkModeBackgroundContrast);
+        color: var();
+        font-weight: 400;
+        width: 8rem;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: var(--darkModeBackground);
+
+        &:hover {
+            background-color: var(--darkModeTextHover);
+        }
+    }
+
+    .save-quit {
+        display: flex;
+        justify-content: space-between;
+    }
+}

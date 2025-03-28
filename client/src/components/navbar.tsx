@@ -1,34 +1,64 @@
 import React from "react";
 import { FaBars, FaX } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import Style from "../styles/navbar.module.css";
+import style from "../styles/navbar.module.css";
 import LogoutButton from "./logout";
+import { Button } from "./labels";
 
 const Navbar: React.FC = () => {
   const navRef = React.useRef<HTMLDivElement>(null);
 
   const toggleNav = () => {
-    navRef.current?.classList.toggle(Style[ 'nav-toggle' ]);
+    navRef.current?.classList.toggle(style[ 'nav-toggle' ]);
   }
 
   return (
     <header>
-      <Link to="/" className={Style[ 'app-name' ]}>Cer0</Link>
+      <Link to="/" className={style[ 'app-name' ]}>Cer0</Link>
       <nav ref={navRef}>
-        <Link to="/products" onClick={toggleNav}>Create</Link>
-        <Link to="/users" onClick={toggleNav}>Users</Link>
-        <Link to="/about" onClick={toggleNav}>About</Link>
-        <Link to="/contacts" onClick={toggleNav}>Contacts</Link>
-        <Link to="/login" onClick={toggleNav} className={Style[ 'log-in' ]} >Log In</Link>
-        <Link to="/signup" onClick={toggleNav} className={Style[ 'sign-up' ]}>Sign Up </Link>
-        <button className={Style[ 'menu-close' ]} onClick={toggleNav}>
-          <FaX size={'13pt'} />
-        </button>
+        <Link
+          to="/products"
+          onClick={toggleNav}>
+          Create
+        </Link>
+        <Link
+          to="/users"
+          onClick={toggleNav}>
+          Users
+        </Link>
+        <Link
+          to="/about"
+          onClick={toggleNav}>
+          About
+        </Link>
+        <Link
+          to="/contacts"
+          onClick={toggleNav}>
+          Contacts
+        </Link>
+        <Link
+          to="/login"
+          onClick={toggleNav}
+          className={style[ 'log-in' ]}>
+          Log In
+        </Link>
+        <Link
+          to="/signup"
+          onClick={toggleNav}
+          className={style[ 'sign-up' ]}>
+          Sign Up
+        </Link>
+        <Button
+          value={<FaX size={'13pt'} />}
+          onClick={toggleNav}
+          className={style[ 'menu-close' ]} />
         <LogoutButton />
       </nav >
-      <button className={Style[ 'menu-bars' ]} onClick={toggleNav}>
-        <FaBars size={'13pt'} />
-      </button>
+      <Button
+        className={style[ 'menu-bars' ]}
+        onClick={toggleNav}
+        value={<FaBars size={'13pt'} />}
+      />
     </header>
   );
 }

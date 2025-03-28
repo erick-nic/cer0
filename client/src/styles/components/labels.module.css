@@ -1,6 +1,7 @@
 @import "../../styles/App.module.css";
 
 & input {
+    font-size: 11pt;
     color: var(--darkModeText);
     margin: 0.5rem;
     padding: 0.5rem;
@@ -17,6 +18,7 @@
 }
 
 & button {
+    font-size: 11pt;
     background-color: var(--darkModeBackground);
     color: var(--darkModeText);
     font-weight: 400;
@@ -32,6 +34,7 @@
 }
 
 & textarea {
+    font-size: 11pt;
     color: var(--darkModeText);
     margin: 0.5rem;
     padding: 0.5rem;

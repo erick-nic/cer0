@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { config } from "../config";
-import style from "../styles/navbar/logout.module.css"
 import { LogOut } from 'lucide-react';
+import { Button } from './labels';
 
 const LogoutButton: React.FC = () => {
     const navigate = useNavigate();
@@ -33,9 +33,12 @@ const LogoutButton: React.FC = () => {
         }
     }
 
-    return <button onClick={handleLogout} title='Log out' className={style['log-out']}>
-        <LogOut size={23}/>
-    </button>;
+    return (
+          <Button
+          onClick={handleLogout}
+          value={<LogOut size={'15pt'} />}
+        />
+    );
 };
 
 export default LogoutButton;

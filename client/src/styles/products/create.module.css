@@ -5,9 +5,9 @@
     flex-direction: column;
     width: 23rem;
     font-size: 11pt;
-    background-color: var(--darkModeBackground);
-    border-left: 0.2rem solid var(--darkModeBackground);
-    padding: 3rem;
+    background-color: var(--offDarkModeBackground);
+    border-radius: .03rem;
+    padding: 3rem;  
     position: absolute;
     top: 0;
     right: 0;
@@ -58,8 +58,8 @@
     }
 
     & button {
-        background-color: var(--darkModeBackgroundContrast);
-        color: var();
+        background-color: var(--darkModeBackground);
+        color: var(--darkModeText);
         font-weight: 400;
         width: 8rem;
         margin: 0.5rem;

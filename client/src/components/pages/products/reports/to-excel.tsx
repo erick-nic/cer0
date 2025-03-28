@@ -2,22 +2,9 @@ import React, { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { IProducts } from '../../../../types/interface.products';
-import style from '../reports/to-exel.module.css';
+import style from '../../../../styles/products/reports/to-excel.module.css';
 
 const Report: React.FC = () => {
-    const initialState: IProducts = ({
-        name: '',
-        description: '',
-        price: 0,
-        category: '',
-        brand: '',
-        stock: 0,
-        images: [ '' ],
-        attributes: {},
-        rating: undefined,
-        reviews: [],
-    });
-
     const [ products, setProducts ] = useState<IProducts[]>([]);
     const [ error, setError ] = useState<string | null>(null);
     const [ loading, setLoading ] = useState<boolean>(true);
@@ -51,11 +38,17 @@ const Report: React.FC = () => {
         const data = new Blob([ excelBuffer ], { type: fileType });
         saveAs(data, fileName + fileExtension);
     }
+    
+    const returnPage = () => {
+        window.history.back();
+    }
 
     return (
         <div className={ style[ 'products-reports' ]}>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
+            <button onClick={returnPage}>Back</button>
+            <button onClick={exportToExcel}>Export to XLSX</button>
             {!loading && !error && (
                 <table>
                     <thead>
@@ -82,7 +75,6 @@ const Report: React.FC = () => {
                     </tbody>
                 </table>
             )}
-            <button onClick={exportToExcel}>Export to XLSX</button>
         </div>
     );
 };

@@ -30,7 +30,7 @@
         width: 100%;
         margin: 3rem;
         padding: 2rem;
-        border-radius: 3rem;
+        border-radius: 1rem;
         background-color: var(--offDarkModeBackground);
         color: var(--darkModeText);
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { config } from "../config";
-import style from '../styles/logout.module.css';
+import style from '../styles/navbar/logout.module.css';
 import { LogOut } from 'lucide-react';
 
 const LogoutButton: React.FC = () => {

@@ -1,0 +1,42 @@
+@import '../../../styles/App.module.css';
+
+.products-reports {
+    height: 100%;
+    overflow: hidden;
+
+    & button {
+        background-color: var(--darkModeBody);
+        color: var(--darkModeBody);
+        font-weight: 500;
+        width: 8rem;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: var(--darkModeBackground);
+
+        &:hover {
+            background-color: var(--darkModeTextHover);
+        }
+    }
+
+    & table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11pt;
+        background-color: var(--darkModeBackground);
+        color: var(--darkModeText);
+        border-radius: 1rem;
+
+        & th {
+            background-color: var(--darkModeBody);
+            color: var(--darkModeText);
+            padding: 0.5rem;
+            border: 1px solid var(--darkModeText);
+        }
+
+        & td {
+            padding: 0.5rem;
+            border: 1px solid var(--darkModeText);
+        }
+    }
+}

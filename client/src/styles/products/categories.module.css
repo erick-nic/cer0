@@ -1,0 +1,90 @@
+@import '../App.module.css';
+
+.category-create {
+    position: absolute;
+    border-radius: 1rem;
+    width: 20rem;
+    height: 30rem;
+    margin-right: calc(50% - 10rem);
+    background-color: var(--offDarkModeBackground);
+    color: var(--darkModeText);
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+
+    & label {
+        font-size: 11pt;
+        font-weight: 400;
+    }
+
+    & .response {
+        color: var(--darkModeText);
+    }
+
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1.5rem;
+        padding: 1rem;
+        cursor: pointer;
+    }
+
+    & textarea {
+        color: var(--darkModeText);
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: none;
+        background-color: var(--darkModeBody);
+        transition: 3.8rem 0.5s ease-in;
+        width: 13rem;
+        max-width: 100vh;
+
+        &:focus {
+            outline: none;
+            border: 0.2em solid var(--focusDarkMode);
+        }
+    }
+
+    & .category-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+
+        & input {
+            color: var(--darkModeText);
+            margin: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            background-color: var(--darkModeBody);
+            transition: 3.8rem 0.5s ease-in;
+            width: 13rem;
+
+            &:focus {
+                outline: none;
+                border: 0.2em solid var(--focusDarkMode);
+            }
+        }
+
+        & button {
+            background-color: var(--darkModeBackground);
+            color: var(--darkModeText);
+            font-weight: 400;
+            width: 8rem;
+            margin: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: var(--darkModeBackground);
+
+            &:hover {
+                background-color: var(--darkModeTextHover);
+            }
+        }
+    }
+}

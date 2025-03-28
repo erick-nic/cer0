@@ -1,5 +1,46 @@
 {
-  "categories": [],
+  "categories": [
+    {
+      "_id": "67cfce3ac9563e984d981181",
+      "name": "smartphones",
+      "description": "All brands of smartphones",
+      "createdAt": "2025-03-11T05:46:34.707Z",
+      "updatedAt": "2025-03-11T05:46:34.707Z",
+      "__v": 0
+    },
+    {
+      "_id": "67cfce93c9563e984d981183",
+      "name": "laptops",
+      "description": "Laptops from every type of brands",
+      "createdAt": "2025-03-11T05:48:03.177Z",
+      "updatedAt": "2025-03-11T05:48:03.177Z",
+      "__v": 0
+    },
+    {
+      "_id": "67cfcebcc9563e984d981185",
+      "name": "monitors",
+      "description": "Every type and brands of monitors",
+      "createdAt": "2025-03-11T05:48:44.576Z",
+      "updatedAt": "2025-03-11T05:48:44.576Z",
+      "__v": 0
+    },
+    {
+      "_id": "67cfcef9c9563e984d981187",
+      "name": "tablets",
+      "description": "Every type and brands of tablets",
+      "createdAt": "2025-03-11T05:49:45.194Z",
+      "updatedAt": "2025-03-11T05:49:45.194Z",
+      "__v": 0
+    },
+    {
+      "_id": "67cfcf16c9563e984d981189",
+      "name": "smartwatchs",
+      "description": "Every type and brands of smartwatchs",
+      "createdAt": "2025-03-11T05:50:14.258Z",
+      "updatedAt": "2025-03-11T05:50:14.258Z",
+      "__v": 0
+    }
+  ],
   "users": [
     {
       "_id": "67cb7544e623b291202e3193",
@@ -22,5 +63,51 @@
   ],
   "orders": [],
   "carts": [],
-  "products": []
+  "products": [
+    {
+      "_id": "67d061e7b1de1707c551fdc1",
+      "name": "Samsung A54",
+      "description": "Smartphone Samsung Galaxy",
+      "price": 300,
+      "category": "67cfce3ac9563e984d981181",
+      "brand": "Samsung",
+      "stock": 5,
+      "images": [
+        "https://images.samsung.com/is/image/samsung/p6pim/levant/sm-a546ezwdmea/gallery/levant-galaxy-a54-5g-sm-a546-sm-a546ezwdmea-535923784?$684_547_PNG$"
+      ],
+      "attributes": {
+        "color": "Black",
+        "weight": "6.4\"",
+        "dimensions": "202 g (7.13 oz)"
+      },
+      "rating": 0,
+      "reviews": [],
+      "createdAt": "2025-03-11T16:16:39.680Z",
+      "updatedAt": "2025-03-11T16:16:39.680Z",
+      "__v": 0
+    },
+    {
+      "_id": "67d07680d145490f7ac05a4a",
+      "name": "Laptop",
+      "description": "Laptop Dell Latitude 7480",
+      "price": 700,
+      "category": "67cfce93c9563e984d981183",
+      "brand": "Dell",
+      "stock": 18,
+      "images": [
+        "https://i5.walmartimages.com/seo/Dell-Latitude-7480-Core-i5-6300U-2-40GHz-8GB-RAM-256GB-M-2-13-Laptop-Windows-10-Reused_d7f1f520-41ec-4134-9d13-968aa3e21606.da2a3540d44c51598e4fb3df1ce73c26.jpeg",
+        "https://amso.eu/hpeciai/c4ca612aebe63bb79001f63b3010f90c/eng_pl_Dell-Latitude-7480-i5-6300U-16GB-480GB-SSD-1920x1080-Class-A-Windows-10-Home-222355_3.jpg"
+      ],
+      "attributes": {
+        "color": "Black",
+        "weight": "14''",
+        "dimensions": "‎18.5 x 11.5 x 3.1 inches"
+      },
+      "rating": 0,
+      "reviews": [],
+      "createdAt": "2025-03-11T17:44:32.258Z",
+      "updatedAt": "2025-03-11T17:44:32.258Z",
+      "__v": 0
+    }
+  ]
 }

@@ -1,16 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../../App"
-import Home from "../pages/home";
-import Contacts from "../pages/contacts";
-import About from "../pages/about";
-import Signup from "../pages/signup";
-import Login from "../pages/login";
-import Products from "../pages/products";
+import Home from "../pages/navbar/home";
+import Contacts from "../pages/navbar/contacts";
+import About from "../pages/navbar/about";
+import Signup from "../pages/navbar/signup";
+import Login from "../pages/navbar/login";
+import Products from "../pages/navbar/products";
 import Details from "../pages/products/products.details"
 import Create from "../pages/products/products.create";
-import Users from "../pages/users";
+import Category from "../pages/products/categories";
+import Users from "../pages/navbar/users";
 import Shop from "../pages/shop";
-import Report from "../pages/products/reports/to-exel";
+import Report from "../pages/products/reports/to-excel";
 
 const router = createBrowserRouter([ {
     path: "/",
@@ -30,11 +31,12 @@ const router = createBrowserRouter([ {
                     element: <Create />
                 },
                 {
-                    path: "reports/to-excel/",
-                    element: <Report />
-                }
+                    path: "create/category",
+                    element: <Category />
+                },
             ]
         },
+        { path: "/products/reports/to-excel", element: <Report /> },
         { path: "users", element: <Users /> },
         { path: "shop", element: <Shop /> },
         { path: "contacts", element: <Contacts /> },

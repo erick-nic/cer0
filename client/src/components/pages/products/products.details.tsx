@@ -43,7 +43,7 @@ const Details: React.FC = () => {
     }, [ id ]);
 
     const handleClick = () => {
-        navigate('/products');
+        window.history.back();
     }
 
     if (error) return <div className={style[ 'error' ]}>Error: {error}</div>;

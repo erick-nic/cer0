@@ -1,5 +1,5 @@
 import React from "react";
-import style from '../../styles/home.module.css';
+import style from '../../../styles/navbar/home.module.css';
 
 const Home: React.FC = () => {
     return (

@@ -3,7 +3,6 @@ import { IProducts } from "../../../types/interface.products";
 import { config } from "../../../config";
 import { TErrors } from "../../../types/type.error";
 import style from "../../../styles/products/create.module.css"
-import { useNavigate } from "react-router-dom";
 import { X } from 'lucide-react';
 import ICategory from "../../../types/interface.category";
 
@@ -25,7 +24,6 @@ const Create: React.FC = () => {
     const [ error, setError ] = useState<TErrors[ 'products' ]>({});
     const [ response, setResponse ] = useState<string>('');
     const [ categories, setCategories ] = useState<ICategory[]>([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -45,7 +43,7 @@ const Create: React.FC = () => {
         fetchProducts();
     }, []);
     const handleCancel = () => {
-        navigate('/products');
+        window.history.back();
     };
 
     const handleChange = (
@@ -101,7 +99,7 @@ const Create: React.FC = () => {
             const resData = await res.json();
             setResponse(resData.message);
             alert(resData.message);
-            navigate('/products');
+            window.history.back();
         } catch (error) {
             console.error(error);
         }

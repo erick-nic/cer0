@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import style from "../../styles/singup.module.css"
 import { Link, useNavigate } from "react-router-dom";
-import IUsers from "../../types/interface.user";
-import { config } from "../../config";
-import { TErrors } from "../../types/type.error";
+import style from "../../../styles/navbar/singup.module.css";
+import IUsers from "../../../types/interface.user";
+import { config } from "../../../config";
+import { TErrors } from "../../../types/type.error";
 
 const Signup: React.FC = () => {
   const initalState: IUsers = {

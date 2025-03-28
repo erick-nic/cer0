@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { IProducts } from "../../types/interface.products";
-import { config } from "../../config";
-import style from "../../styles/products.module.css";
+import { IProducts } from "../../../types/interface.products";
+import { config } from "../../../config";
+import style from '../../../styles/navbar/products.module.css';
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const Products: React.FC = () => {
@@ -27,6 +27,14 @@ const Products: React.FC = () => {
 
   const generateReport = () => {
     navigate(`/products/reports/to-excel`);
+  }
+
+  const returnPage = () => {
+    window.history.back();
+  }
+
+  const createCaregory = () => {
+    navigate(`/products/create/category`);
   }
 
   useEffect(() => {
@@ -59,8 +67,10 @@ const Products: React.FC = () => {
         <div>
           <div className={style[ 'page-label' ]}>Products list</div>
           <div className={style[ 'sub-menu' ]} >
-            <button onClick={createProducts}>Create</button>
-            <button onClick={generateReport}>XSLX</button>
+            <button onClick={createProducts}>Create Product</button>
+            <button onClick={createCaregory}>Create Category</button>
+            <button onClick={generateReport}>Report XSLX</button>
+            <button onClick={returnPage}>Back</button>
           </div>
           <div className={style[ 'products-cards' ]}>
             <ul>
@@ -78,8 +88,8 @@ const Products: React.FC = () => {
                 </li>
               ))}
             </ul>
+          </div>
         </div>
-      </div>
       )}
       <Outlet />
     </div>

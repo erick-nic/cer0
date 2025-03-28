@@ -1,14 +1,13 @@
-@import '../styles/App.module.css';
+@import "../App.module.css";
 
-.log-in {
+.sing-up {
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    font-size: 0.8rem;
     top: 0;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     background-color: var(--darkModeBackground);
 
@@ -17,6 +16,7 @@
         top: 0;
         left: 0;
         font-size: 18pt;
+        font-weight: 400;
         text-decoration: none;
         color: var(--darkModeText);
         padding: 0.8rem;
@@ -52,7 +52,7 @@
 
             &:focus {
                 outline: none;
-                border: 0.2em solid var(--focusDarkMode);
+                border: 0.2em solid var(--focusDarkMode);                
             }
         }
 
@@ -75,11 +75,16 @@
             }
         }
 
-        .sign-up {
-            text-decoration: none;
+        & .next-previous {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .log-in {
             display: block;
             text-align: center;
             width: 5rem;
+            text-decoration: none;
             background-color: var(--darkModeBackground);
             color: var(--darkModeText);
             padding: 0.5rem;

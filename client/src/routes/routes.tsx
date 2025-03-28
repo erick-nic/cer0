@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../../App"
+import App from "../App"
 import Home from "../pages/navbar/home";
 import Contacts from "../pages/navbar/contacts";
 import About from "../pages/navbar/about";
@@ -10,7 +10,6 @@ import Details from "../pages/products/products.details"
 import Create from "../pages/products/products.create";
 import Category from "../pages/products/categories";
 import Users from "../pages/navbar/users";
-import Shop from "../pages/shop";
 import Report from "../pages/products/reports/to-excel";
 
 const router = createBrowserRouter([ {
@@ -38,7 +37,6 @@ const router = createBrowserRouter([ {
         },
         { path: "/products/reports/to-excel", element: <Report /> },
         { path: "users", element: <Users /> },
-        { path: "shop", element: <Shop /> },
         { path: "contacts", element: <Contacts /> },
         { path: "about", element: <About /> },
         { path: "signup", element: <Signup /> },

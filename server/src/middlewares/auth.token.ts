@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 import Users from '../models/users.model';
 import { blacklist } from '../controllers/users.controller';
+import IUsers from '../interfaces/users.interface';
 dotenv.config();
 declare global {
     namespace Express {
@@ -27,12 +28,14 @@ export const authToken = async (req: Request, res: Response, next: NextFunction)
 
     try {
         const key = process.env.PRIVATE_KEY || '';
-        const decoded = jwt.verify(token, key) as { username: string };
+        const decoded = jwt.verify(token, key) as { name: string };
+        const user = await Users.findOne({ name: decoded.name });
 
-        const user = await Users.findOne({ name: decoded.username });
-        req.user = decoded;
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-        if (user?.role === 'admin') {
+        if (user.role === 'admin') {
             return next();
         } else {
             if (req.path === '/users' || req.path.startsWith('/updateUser/') || req.path.startsWith('/deleteUser/')) {

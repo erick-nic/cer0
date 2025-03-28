@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
-import style from '../../../styles/products/categories.module.css';
+import style from "../../styles/products/categories.module.css";
 import { useState } from 'react';
-import ICategory from '../../../types/interface.category';
+import ICategory from '../../types/interface.category';
 
 const Category = () => {
     const handleCancel = () => {
@@ -17,7 +17,7 @@ const Category = () => {
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-        setData((prev) => ({
+        setCategories((prev) => ({
             ...prev,
             [ name ]: value,
         }));
@@ -25,7 +25,6 @@ const Category = () => {
 
     const [ category, setCategories ] = useState<ICategory>(initialState);
     const [ response, setResponse ] = useState();
-    const [ data, setData ] = useState()
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -36,7 +35,7 @@ const Category = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(category)
             });
             const resData = await res.json();
             setResponse(resData.message);
@@ -58,15 +57,17 @@ const Category = () => {
                 <h3>Create a Category</h3><br />
                 <label>Name</label>
                 <input
+                    onChange={handleChange}
                     type="text"
                     name="name"
-                    value={data.name}
+                    value={category.name}
                     required
                 />
                 <label>Description</label>
                 <textarea
+                    onChange={handleChange}
                     name="description"
-                    value={data.description}
+                    value={category.description}
                     required
                 />
                 <button type="submit">Create</button>

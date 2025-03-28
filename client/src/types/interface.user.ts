@@ -11,7 +11,9 @@ interface IUsers {
         state: string,
         postalCode: string
     },
-    phone: string
+    phone: string,
+    createdAt?: string,
+    updatedAt?: string,
 }
 
 export default IUsers

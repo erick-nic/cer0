@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { IProducts } from "../../../types/interface.products";
-import { config } from "../../../config";
-import { TErrors } from "../../../types/type.error";
-import style from "../../../styles/products/create.module.css"
+import { IProducts } from "../../types/interface.products";
+import { config } from "../../config";
+import { TErrors } from "../../types/type.error";
+import style from "../../styles/products/create.module.css";
 import { X } from 'lucide-react';
-import ICategory from "../../../types/interface.category";
+import ICategory from "../../types/interface.category";
 
 const Create: React.FC = () => {
     const initialState: IProducts = ({

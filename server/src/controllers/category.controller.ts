@@ -35,7 +35,7 @@ const createCategory = async (req: Request, res: Response): Promise<void> => {
         const { name, description } = req.body;
         const newCategory = new Category({ name, description });
         await newCategory.save();
-        res.status(201).json(newCategory);
+        res.status(201).json({ message: 'category created successfully', newCategory});
     } catch (error) {
         res.status(400).json({ error: 'Error creating category', details: error });
     }

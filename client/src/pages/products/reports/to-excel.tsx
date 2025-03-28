@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import { IProducts } from '../../../../types/interface.products';
-import style from '../../../../styles/products/reports/to-excel.module.css';
+import { IProducts } from '../../../types/interface.products';
+import style from "../../../styles/products/reports/to-excel.module.css";
 
 const Report: React.FC = () => {
     const [ products, setProducts ] = useState<IProducts[]>([]);
@@ -53,6 +53,7 @@ const Report: React.FC = () => {
                 <table>
                     <thead>
                         <tr>
+                            <th>_id</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Price</th>
@@ -64,6 +65,7 @@ const Report: React.FC = () => {
                     <tbody>
                         {products.map((product, index) => (
                             <tr key={index}>
+                                <td>{product._id}</td>
                                 <td>{product.name}</td>
                                 <td>{product.description}</td>
                                 <td>{product.price}</td>

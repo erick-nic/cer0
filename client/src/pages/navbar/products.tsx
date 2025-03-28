@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { IProducts } from "../../../types/interface.products";
-import { config } from "../../../config";
-import style from '../../../styles/navbar/products.module.css';
+import { IProducts } from "../../types/interface.products";
+import { config } from "../../config";
+import style from "../../styles/navbar/products.module.css";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const Products: React.FC = () => {
@@ -39,7 +39,7 @@ const Products: React.FC = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const getProducts: string = config.getProducts;
+      // const getProducts: string = config.getProducts;
       try {
         const response = await fetch('http://localhost:3001/api/v1/get-products');
         if (!response.ok) {
@@ -65,7 +65,7 @@ const Products: React.FC = () => {
     <div className={style[ 'products-page' ]}>
       {!isDetailsPage && (
         <div>
-          <div className={style[ 'page-label' ]}>Products list</div>
+          {/* <div className={style[ 'page-label' ]}>Products list</div> */}
           <div className={style[ 'sub-menu' ]} >
             <button onClick={createProducts}>Create Product</button>
             <button onClick={createCaregory}>Create Category</button>

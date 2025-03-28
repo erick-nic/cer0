@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
-import style from "../../../styles/products/details.module.css"
+import style from "../../styles/products/details.module.css";
 import { useEffect, useState } from "react";
-import { config } from "../../../config";
-import { IProducts } from "../../../types/interface.products";
+import { config } from "../../config";
+import { IProducts } from "../../types/interface.products";
 
 const Details: React.FC = () => {
     const initialState: IProducts = ({

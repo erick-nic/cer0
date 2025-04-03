@@ -18,21 +18,6 @@
         color: transparent;
     }
 
-    & button {
-        background-color: var(--darkModeBody);
-        color: var(--darkModeBody);
-        font-weight: 500;
-        width: 8rem;
-        margin: 0.5rem;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-        border: var(--darkModeBackground);
-
-        &:hover {
-            background-color: var(--darkModeTextHover);
-        }
-    }
-
     & .products-cards {
         color: var(--darkModeText);
         align-items: center;

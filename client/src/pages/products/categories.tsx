@@ -1,7 +1,9 @@
 import { X } from 'lucide-react';
-import style from "../../styles/products/categories.module.css";
+import style from "../../styles/products/absolute-pages.module.css";
 import { useState } from 'react';
 import ICategory from '../../types/interface.category';
+import Cards from '../../components/cards';
+import { Button, Input } from '../../components/labels';
 
 const Category = () => {
     const handleCancel = () => {
@@ -47,31 +49,35 @@ const Category = () => {
     };
 
     return (
-        <div className={style[ 'category-create' ]}>
-            <X className={style[ 'close' ]} onClick={handleCancel} />
-            <form onSubmit={handleSubmit} className={style[ 'category-form' ]}>
+        <div className={style[ 'pages' ]}>
+            <Cards>
                 <div className={style[ 'response' ]} >
                     {response}
                 </div>
-
-                <h3>Create a Category</h3><br />
-                <label>Name</label>
-                <input
-                    onChange={handleChange}
-                    type="text"
-                    name="name"
-                    value={category.name}
-                    required
-                />
-                <label>Description</label>
-                <textarea
-                    onChange={handleChange}
-                    name="description"
-                    value={category.description}
-                    required
-                />
-                <button type="submit">Create</button>
-            </form>
+                <form onSubmit={handleSubmit} className={style[ 'category-form' ]}>
+                    <X
+                        className={style[ 'close' ]}
+                        onClick={handleCancel}
+                    />
+                    <Input
+                        name="name"
+                        value={category.name}
+                        onChange={handleChange}
+                        placeholder='Category Name'
+                    />
+                    <Input
+                        name="description"
+                        value={category.description}
+                        onChange={handleChange}
+                        placeholder='Category Description'
+                    />
+                    <Button
+                        type="submit"
+                        onClick={handleSubmit}
+                        value="Create"
+                    />
+                </form>
+            </Cards>
         </div>
     );
 };

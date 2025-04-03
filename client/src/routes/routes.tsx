@@ -8,6 +8,7 @@ import Login from "../pages/navbar/login";
 import Products from "../pages/navbar/products";
 import Details from "../pages/products/products.details"
 import Create from "../pages/products/products.create";
+import Update from "../pages/products/products.update";
 import Category from "../pages/products/categories";
 import Users from "../pages/navbar/users";
 import Report from "../pages/products/reports/to-excel";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([ {
                 {
                     path: "details/:id",
                     element: <Details />
+                },
+                {
+                    path: "update/:id",
+                    element: <Update />
                 },
                 {
                     path: "create/",

@@ -1,10 +1,14 @@
-import Style from "../styles/components/cards.module.css";
+import style from "../styles/components/cards.module.css";
 
-const Cards = () => {
+type Props = {
+    children?: React.ReactNode
+}
+
+const Cards: React.FC<Props> = ({ children }) => {
     return (
-        <>
-            <div className={Style[ 'card' ]}></div>
-        </>
+        <div className={style[ 'card' ]}>
+            { children }
+        </div>
     )
 }
 

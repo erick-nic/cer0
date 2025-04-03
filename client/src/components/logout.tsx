@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { config } from "../config";
-import { LogOut } from 'lucide-react';
 import { Button } from './labels';
 
 const LogoutButton: React.FC = () => {
@@ -34,9 +33,9 @@ const LogoutButton: React.FC = () => {
     }
 
     return (
-          <Button
-          onClick={handleLogout}
-          value={<LogOut size={'15pt'} />}
+        <Button
+            onClick={handleLogout}
+            value="Log out"
         />
     );
 };

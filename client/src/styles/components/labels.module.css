@@ -3,13 +3,15 @@
 & input {
     font-size: 11pt;
     color: var(--darkModeText);
-    margin: 0.5rem;
+    margin: 1rem  0.5rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
     border: none;
     background-color: var(--darkModeBody);
     transition: 3.8rem 0.5s ease-in;
     width: 13rem;
+    border: 0.1em solid var(--focusDarkMode);
+
 
     &:focus {
         outline: none;
@@ -22,11 +24,13 @@
     background-color: var(--darkModeBackground);
     color: var(--darkModeText);
     font-weight: 400;
-    width: 8rem;
+    width: auto;
+    height: auto;
     margin: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     border: var(--darkModeBackground);
+    border: 0.1em solid var(--focusDarkMode);
 
     &:hover {
         background-color: var(--darkModeTextHover);
@@ -44,6 +48,7 @@
     transition: 3.8rem 0.5s ease-in;
     width: 13rem;
     max-width: 100vh;
+    border: 0.1em solid var(--focusDarkMode);
 
     &:focus {
         outline: none;

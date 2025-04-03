@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { IProducts } from "../../types/interface.products";
-import { config } from "../../config";
 import style from "../../styles/navbar/products.module.css";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Button } from "../../components/labels";
 
 const Products: React.FC = () => {
   const [ products, setProducts ] = useState<IProducts[]>([]);
@@ -65,12 +65,23 @@ const Products: React.FC = () => {
     <div className={style[ 'products-page' ]}>
       {!isDetailsPage && (
         <div>
-          {/* <div className={style[ 'page-label' ]}>Products list</div> */}
           <div className={style[ 'sub-menu' ]} >
-            <button onClick={createProducts}>Create Product</button>
-            <button onClick={createCaregory}>Create Category</button>
-            <button onClick={generateReport}>Report XSLX</button>
-            <button onClick={returnPage}>Back</button>
+            <Button
+              onClick={createProducts}
+              value="Create Product"
+            />
+            <Button
+              onClick={createCaregory}
+              value="Create category"
+            />
+            <Button
+              onClick={generateReport}
+              value="Create Product"
+            />
+            <Button
+              onClick={returnPage}
+              value="Back"
+            />
           </div>
           <div className={style[ 'products-cards' ]}>
             <ul>
@@ -82,9 +93,14 @@ const Products: React.FC = () => {
                   <p>Name: {product.name}</p>
                   <p>Brand: {product.brand}</p>
                   <p>Price: ${product.price}</p>
-                  <button onClick={() => updateProduct(product?._id)}>Update</button>
-                  <button onClick={() => deleteProduct(product?._id)}>Delete</button>
-                  <button>Add to the car</button>
+                  <Button
+                    onClick={() => updateProduct(product?._id)}
+                    value="Update"
+                  />
+                  <Button
+                    onClick={() => deleteProduct(product?._id)}
+                    value="Delete"
+                  />
                 </li>
               ))}
             </ul>

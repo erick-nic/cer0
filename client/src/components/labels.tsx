@@ -1,20 +1,21 @@
-import { ReactNode } from "react";
+import { HTMLInputTypeAttribute, ReactNode } from "react";
 import style from "../styles/components/labels.module.css";
 
 type Props = {
     name?: string,
-    onClick?: () => void;
-    onChange?: () => void;
+    onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
+    onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement>;
     value: ReactNode;
     className?: string;
+    type?: HTMLInputTypeAttribute;
+    placeholder?: string;
 }
 
-const Button: React.FC<Props> = ({ name, onClick, onChange, value, className }) => {
+const Button: React.FC<Props> = ({ name, onClick, value, className }) => {
     return (
         <button
             className={style[ '' ] || className}
             onClick={onClick}
-            onChange={onChange}
             name={name}
         >
             {value}
@@ -22,15 +23,16 @@ const Button: React.FC<Props> = ({ name, onClick, onChange, value, className }) 
     )
 }
 
-const Textarea: React.FC<Props> = ({ name, onClick, onChange, value, className }) => {
+const Textarea: React.FC<Props> = ({ name, onClick, onChange, value, className, placeholder }) => {
     return (
         <textarea
             className={style[ '' ] || className}
             onClick={onClick}
             onChange={onChange}
             name={name}
+            placeholder={placeholder}
+
         >
-            {value}
         </textarea>
     )
 }
@@ -43,13 +45,28 @@ const Select: React.FC<Props> = ({ name, onClick, onChange, value, className }) 
             onChange={onChange}
             name={name}
         >
-            {value}
         </select>
+    )
+}
+
+const Input: React.FC<Props> = ({ name, onClick, onChange, value, className, type, placeholder }) => {
+    return (
+        <input
+            type={type}
+            className={style[ '' ] || className}
+            onClick={onClick}
+            onChange={onChange}
+            name={name}
+            placeholder={placeholder}
+
+        >
+        </input>
     )
 }
 
 export {
     Button,
     Textarea,
-    Select
+    Select,
+    Input
 };

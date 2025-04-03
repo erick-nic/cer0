@@ -1,0 +1,37 @@
+@import '../App.module.css';
+
+.pages {
+    position: absolute;
+    border-radius: 1rem;
+    min-width: 20rem;
+    min-height: 30rem;
+    max-width: 30rem;
+    max-height: auto;
+    margin-right: calc(50% - 15rem);
+    background-color: var(--offDarkModeBackground);
+    color: var(--darkModeText);
+    top: 0;
+    right: 0;
+    margin-top: 2rem;
+    z-index: 1000;
+
+    & .response {
+        color: var(--darkModeText);
+    }
+
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1.5rem;
+        padding: 1rem;
+        cursor: pointer;
+    }
+
+    & .category-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

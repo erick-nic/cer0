@@ -40,19 +40,19 @@ const Navbar: React.FC = () => {
           to="/login"
           onClick={toggleNav}
           className={style[ 'log-in' ]}>
-          Log In
+          Login
         </Link>
         <Link
           to="/signup"
           onClick={toggleNav}
           className={style[ 'sign-up' ]}>
-          Sign Up
+          Sign up
         </Link>
+        <LogoutButton />
         <Button
           value={<FaX size={'13pt'} />}
           onClick={toggleNav}
           className={style[ 'menu-close' ]} />
-        <LogoutButton />
       </nav >
       <Button
         className={style[ 'menu-bars' ]}

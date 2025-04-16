@@ -61,7 +61,7 @@ const logIn = async (req: Request, res: Response): Promise<any> => {
             message: responses.logIn.INCORRECT_CREDENTIALS
         });
     } else {
-        const token = jwt.sign({ name: user.name }, key, { algorithm: 'HS256', expiresIn: '1h' });
+        const token = jwt.sign({ name: user.name }, key, { algorithm: 'HS256', expiresIn: '24h' });
         console.log(token);
         res.cookie('token', token, {
             httpOnly: true,

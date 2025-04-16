@@ -13,6 +13,11 @@ const categorySchema = new Schema<ICategory>({
     type: String,
     required: [true, 'Category description is required'],
     minlength: [8, 'Description must be at least 8 characters long']
+  },
+  image: {
+    type: String,
+    required: [true, 'Category image is required'],
+    minlength: [8, 'Image URL must be at least 8 characters long']
   }
 }, {
   timestamps: true

@@ -32,8 +32,8 @@ const getCategorys = async (req: Request, res: Response): Promise<any> => {
 
 const createCategory = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { name, description } = req.body;
-        const newCategory = new Category({ name, description });
+        const { name, description, image } = req.body;
+        const newCategory = new Category({ name, description, image });
         await newCategory.save();
         res.status(201).json({ message: 'category created successfully', newCategory});
     } catch (error) {

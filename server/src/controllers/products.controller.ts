@@ -60,6 +60,30 @@ const getProducts = async (req: Request, res: Response): Promise<any> => {
     }
 };
 
+const getProductsByCategory = async (req: Request, res: Response): Promise<any> => {
+    const category_id = req.params.id;
+    try {
+        if (!mongoose.Types.ObjectId.isValid(category_id)) {
+            return res.status(400).json({
+                message: 'Invalid _id format'
+            });
+        }
+
+        const products = await Products.find({ category: category_id });
+        if (!products) {
+            return res.status(404).json({
+                message: 'Products not found'
+            });
+        }
+        return res.status(200).json(products);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            error: 'Internal server error'
+        });
+    }
+};
+
 const updateProducts = async (req: Request, res: Response): Promise<void> => {
     const data: IProducts = req.body;
     try {
@@ -107,6 +131,7 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
 export {
     addProducts,
     getProducts,
+    getProductsByCategory,
     updateProducts,
     deleteProduct
 }; 

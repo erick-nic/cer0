@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import style from "../../styles/products/details.module.css";
+import style from "../../styles/pages/pages.module.css";
 import { useEffect, useState } from "react";
 import { config } from "../../config";
 import { IProducts } from "../../types/interface.products";
@@ -49,7 +49,7 @@ const Details: React.FC = () => {
     if (error) return <div className={style[ 'error' ]}>Error: {error}</div>;
 
     return (
-        <div className={style[ 'products-details' ]}>
+        <div className={style[ 'pages' ]}>
             <img src={productDetailed?.images ? productDetailed.images[ 0 ] : undefined}
                 alt={productDetailed?.description}
                 width={500} height={500} />

@@ -1,18 +1,19 @@
 import { X } from 'lucide-react';
-import style from "../../styles/products/absolute-pages.module.css";
+import style from "../../styles/pages/absolute-pages.module.css";
 import { useState } from 'react';
 import ICategory from '../../types/interface.category';
 import Cards from '../../components/cards';
 import { Button, Input } from '../../components/labels';
 
 const Category = () => {
-    const handleCancel = () => {
+    const pageBack = () => {
         window.history.back();
     };
 
     const initialState: ICategory = ({
         name: '',
-        description: ''
+        description: '',
+        image: ''
     });
 
     const handleChange = (
@@ -41,8 +42,9 @@ const Category = () => {
             });
             const resData = await res.json();
             setResponse(resData.message);
-            alert(resData.message);
-            window.history.back();
+            setTimeout(() => {
+                window.history.back();
+            }, 5000);
         } catch (error) {
             console.error(error);
         }
@@ -54,10 +56,10 @@ const Category = () => {
                 <div className={style[ 'response' ]} >
                     {response}
                 </div>
-                <form onSubmit={handleSubmit} className={style[ 'category-form' ]}>
+                <form onSubmit={handleSubmit}>
                     <X
                         className={style[ 'close' ]}
-                        onClick={handleCancel}
+                        onClick={pageBack}
                     />
                     <Input
                         name="name"
@@ -70,6 +72,12 @@ const Category = () => {
                         value={category.description}
                         onChange={handleChange}
                         placeholder='Category Description'
+                    />
+                    <Input
+                        name="image"
+                        value={category.image}
+                        onChange={handleChange}
+                        placeholder='Image URL'
                     />
                     <Button
                         type="submit"

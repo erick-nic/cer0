@@ -1,54 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
+import React from 'react';
 import { IProducts } from '../../../types/interface.products';
 import style from "../../../styles/products/reports/to-excel.module.css";
+import useFetchData from "./../../../hooks/useFetchData";
+import { exportToExcel } from "../../../utils/export-to-exel";
+import { pageBack } from "../../../utils/handlers";
 
 const Report: React.FC = () => {
-    const [ products, setProducts ] = useState<IProducts[]>([]);
-    const [ error, setError ] = useState<string | null>(null);
-    const [ loading, setLoading ] = useState<boolean>(true);
+    const { data, loading, error } = useFetchData<IProducts[]>('http://localhost:3001/api/v1/get-products');
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:3001/api/v1/get-products');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data: IProducts[] = await response.json();
-                setProducts(data);
-            } catch (error) {
-                setError(error instanceof Error ? error.message : 'An unknown error occurred');
-            } finally {
-                setLoading(false);
-            }
+    const handleExport = () => {
+        if (data) {
+            exportToExcel(data, 'products-report');
         }
-
-        fetchData();
-    }, []);
-
-    const exportToExcel = () => {
-        const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-        const fileExtension = '.xlsx';
-        const fileName = 'products';
-        const ws = XLSX.utils.json_to_sheet(products);
-        const wb = { Sheets: { 'data': ws }, SheetNames: [ 'data' ] };
-        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-        const data = new Blob([ excelBuffer ], { type: fileType });
-        saveAs(data, fileName + fileExtension);
-    }
-    
-    const returnPage = () => {
-        window.history.back();
-    }
+    };
 
     return (
         <div className={ style[ 'products-reports' ]}>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            <button onClick={returnPage}>Back</button>
-            <button onClick={exportToExcel}>Export to XLSX</button>
+            <button onClick={pageBack}>Back</button>
+            <button onClick={handleExport}>Export to XLSX</button>
             {!loading && !error && (
                 <table>
                     <thead>
@@ -63,7 +34,7 @@ const Report: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map((product, index) => (
+                        {data?.map((product, index) => (
                             <tr key={index}>
                                 <td>{product._id}</td>
                                 <td>{product.name}</td>

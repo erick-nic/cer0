@@ -1,0 +1,15 @@
+@import '../App.module.css';
+
+.pages {
+    font-size: 9pt;
+    display: block;
+    color: var(--darkModeText);
+    overflow: hidden;
+
+    & .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+    }
+}

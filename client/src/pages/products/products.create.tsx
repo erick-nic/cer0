@@ -42,7 +42,7 @@ const Create: React.FC = () => {
 
         fetchProducts();
     }, []);
-    const handleCancel = () => {
+    const pageBack = () => {
         window.history.back();
     };
 
@@ -107,7 +107,7 @@ const Create: React.FC = () => {
 
     return (
         <aside className={style[ 'create-products' ]} >
-            <X className={style[ 'close' ]} onClick={handleCancel} />
+            <X className={style[ 'close' ]} onClick={pageBack} />
             <form onSubmit={handleSubmit} className={style[ 'create-form' ]}>
                 <p>Product name</p>
                 <input
@@ -211,7 +211,7 @@ const Create: React.FC = () => {
 
                 <div className={style[ 'save-quit' ]}>
                     <button type="submit">Submit</button>
-                    <button onClick={handleCancel}>Cancel</button>
+                    <button onClick={pageBack}>Cancel</button>
                 </div>
             </form>
         </aside>

@@ -1,0 +1,20 @@
+& table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11pt;
+    background-color: var(--darkModeBackground);
+    color: var(--darkModeText);
+    border-radius: 1rem;
+
+    & th {
+        background-color: var(--darkModeBody);
+        color: var(--darkModeText);
+        padding: 0.5rem;
+        border: 1px solid var(--darkModeText);
+    }
+
+    & td {
+        padding: 0.5rem;
+        border: 1px solid var(--darkModeText);
+    }
+}

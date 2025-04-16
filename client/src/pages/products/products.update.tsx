@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
-import style from "../../styles/products/absolute-pages.module.css";
+import style from "../../styles/pages/absolute-pages.module.css";
 import { useEffect, useState } from "react";
 // import { config } from "../../config";
 import { IProducts } from "../../types/interface.products";
 import { Button, Input } from "./../../components/labels";
 import Cards from "../../components/cards";
 import { X } from "lucide-react";
+import { pageBack, pageReload } from "../../utils/handlers";
 
 const Update: React.FC = () => {
     const initialState: IProducts = ({
@@ -81,19 +82,12 @@ const Update: React.FC = () => {
                 setLoading(false);
             } catch (error) {
                 setError(error instanceof Error ? error.message : 'An unknown error occurred');
-                setLoading(false);
+                setLoading(false);  
             }
         };
         productData();
     }, [ id ]);
 
-    const handleCancel = () => {
-        window.history.back();
-    }
-
-    const handleClick = () => {
-        window.location.reload();
-    }
     if (error) return <div className={style[ 'error' ]}>Error: {error}</div>;
 
     return (
@@ -102,7 +96,7 @@ const Update: React.FC = () => {
                 <form onSubmit={handleSubmit}>
                     <X
                         className={style[ 'close' ]}
-                        onClick={handleCancel}
+                        onClick={pageBack}
                     />
                     <Input
                         name="name"
@@ -149,7 +143,7 @@ const Update: React.FC = () => {
                     <Button
                         type="submit"
                         value="Update"
-                        onClick={handleClick}
+                        onClick={pageReload}
                     />
                 </form>
             </Cards>

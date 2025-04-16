@@ -4,11 +4,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 20rem;
-    height: 40rem;
-    margin: 0 auto;
-    padding: 5rem;
+    font-size: 11pt;
+    width: auto;
+    height: auto;
+    padding: 1rem;
+    margin: 1rem;
     border-radius: 1rem;
     border-color: var(--darkModeColor);
     background-color: var(--offDarkModeBackground);
+
+    & img {
+        border-radius: 1rem;
+        min-height: 11rem;
+        max-height: auto;
+        min-width: auto;
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+        margin-top: 0.5rem;
+    }
 }

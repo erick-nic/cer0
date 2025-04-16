@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
         <Link
           to="/products"
           onClick={toggleNav}>
-          Create
+          Products
         </Link>
         <Link
           to="/users"

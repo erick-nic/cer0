@@ -6,7 +6,7 @@ type Props = {
 
 const Cards: React.FC<Props> = ({ children }) => {
     return (
-        <div className={style[ 'card' ]}>
+        <div className={style[ 'cards' ]}>
             { children }
         </div>
     )

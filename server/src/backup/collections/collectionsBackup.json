@@ -39,6 +39,31 @@
       "createdAt": "2025-03-11T05:50:14.258Z",
       "updatedAt": "2025-03-11T05:50:14.258Z",
       "__v": 0
+    },
+    {
+      "_id": "67e6116d097cf825875b85ec",
+      "name": "Gaming",
+      "description": "All kinds of gaming accessories. ",
+      "createdAt": "2025-03-28T03:03:09.147Z",
+      "updatedAt": "2025-03-28T03:03:09.147Z",
+      "__v": 0
+    },
+    {
+      "_id": "67e612f2097cf825875b85ee",
+      "name": "Home",
+      "description": "Some home electronics",
+      "createdAt": "2025-03-28T03:09:38.445Z",
+      "updatedAt": "2025-03-28T03:09:38.445Z",
+      "__v": 0
+    },
+    {
+      "_id": "680016f7a6cfb961d38503b6",
+      "name": "USBs",
+      "description": "All kind of flash memories",
+      "image": "https://image-us.samsung.com/SamsungUS/pim/migration/computing/memory-storage/usb-flash-drives/muf-32ba-am/Pdpgallery-muf-32ba-am-600x600-C3-052016.jpg?$product-details-jpg$",
+      "createdAt": "2025-04-16T20:45:43.836Z",
+      "updatedAt": "2025-04-16T20:45:43.836Z",
+      "__v": 0
     }
   ],
   "users": [
@@ -83,12 +108,12 @@
       "rating": 0,
       "reviews": [],
       "createdAt": "2025-03-11T16:16:39.680Z",
-      "updatedAt": "2025-03-11T16:16:39.680Z",
+      "updatedAt": "2025-04-03T23:10:12.359Z",
       "__v": 0
     },
     {
       "_id": "67d07680d145490f7ac05a4a",
-      "name": "Laptop",
+      "name": "Dell 7480",
       "description": "Laptop Dell Latitude 7480",
       "price": 700,
       "category": "67cfce93c9563e984d981183",
@@ -106,7 +131,51 @@
       "rating": 0,
       "reviews": [],
       "createdAt": "2025-03-11T17:44:32.258Z",
-      "updatedAt": "2025-03-11T17:44:32.258Z",
+      "updatedAt": "2025-04-03T23:20:12.590Z",
+      "__v": 0
+    },
+    {
+      "_id": "68098af72a7109b34375346c",
+      "name": "USB",
+      "description": "32GB USB socket USB 3.0",
+      "price": 3,
+      "category": "680016f7a6cfb961d38503b6",
+      "brand": "Samsung",
+      "stock": 100,
+      "images": [
+        "https://image-us.samsung.com/SamsungUS/home/computing/memory-storage/usb-flash-drives/07302024/MUF-256BE3-AM_S_COM_N01_V01.jpg?$product-card-small-jpg$"
+      ],
+      "attributes": {
+        "color": "White",
+        "weight": "2\"",
+        "dimensions": "13g"
+      },
+      "rating": 0,
+      "reviews": [],
+      "createdAt": "2025-04-24T00:51:03.204Z",
+      "updatedAt": "2025-04-24T00:51:03.204Z",
+      "__v": 0
+    },
+    {
+      "_id": "68098d5f2a7109b34375348c",
+      "name": "USB Kingston",
+      "description": "32GB USB Kingston sockets type USB3.0",
+      "price": 8,
+      "category": "680016f7a6cfb961d38503b6",
+      "brand": "Kingston",
+      "stock": 100,
+      "images": [
+        "https://benstore.com.ph/23528-medium_default/kingston-datatraveler-32gb-usb-30-flash-drive-.jpg"
+      ],
+      "attributes": {
+        "color": "Black",
+        "weight": "2\"",
+        "dimensions": "13g"
+      },
+      "rating": 0,
+      "reviews": [],
+      "createdAt": "2025-04-24T01:01:19.902Z",
+      "updatedAt": "2025-04-24T01:01:19.902Z",
       "__v": 0
     }
   ]

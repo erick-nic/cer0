@@ -1,114 +1,77 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { IProducts } from "../../types/interface.products";
-import { config } from "../../config";
-import { TErrors } from "../../types/type.error";
 import style from "../../styles/products/create.module.css";
-import { X } from 'lucide-react';
+import Style from "../../styles/pages/absolute-pages.module.css"
+import { X } from "lucide-react";
 import ICategory from "../../types/interface.category";
+import useFetchData from "../../hooks/useFetchData";
+import { useFormHandlers } from "../../hooks/useFormHandlers";
+import { pageBack } from "../../utils/handlers";
+import useSubmitData from "../../hooks/useSubmitData";
+import { TErrors } from "../../types/type.error";
+import Cards from "../../components/cards";
 
 const Create: React.FC = () => {
-    const initialState: IProducts = ({
-        name: '',
-        description: '',
+    const initialState: IProducts = {
+        name: "",
+        description: "",
         price: 0,
-        category: '',
-        brand: '',
+        category: "",
+        brand: "",
         stock: 0,
-        images: [ '' ],
+        images: [ "" ],
         attributes: {},
         rating: undefined,
         reviews: [],
-    });
+    };
 
-    const [ data, setData ] = useState<IProducts>(initialState);
+    const categories = useFetchData<ICategory[]>(
+        "http://localhost:3001/api/v3/get-categories"
+    );
+
+    const {
+        data,
+        handleChange,
+        handleAttributesChange,
+        handleImagesChange,
+        addImageField,
+    } = useFormHandlers(initialState);
+
+    const { submitData, message } = useSubmitData<IProducts>();
     const [ error, setError ] = useState<TErrors[ 'products' ]>({});
-    const [ response, setResponse ] = useState<string>('');
-    const [ categories, setCategories ] = useState<ICategory[]>([]);
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            const getProducts: string = config.getProducts;
-            try {
-                const response = await fetch('http://localhost:3001/api/v3/get-categories');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data: ICategory[] = await response.json();
-                setCategories(data);
-            } catch (error) {
-                setError(error instanceof Error ? error.message : 'An unknown error occurred');
-            }
+    const handleErrors = () => {
+        const errors: TErrors[ 'products' ] = {}
+        if (data.description.length < 10) {
+            errors.description = 'Description must be a least 10 caracters'
         }
-
-        fetchProducts();
-    }, []);
-    const pageBack = () => {
-        window.history.back();
-    };
-
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-    ) => {
-        const { name, value } = e.target;
-        setData((prev) => ({
-            ...prev,
-            [ name ]: value,
-        }));
-    };
-
-    const handleAttributesChange = (
-        e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const { name, value } = e.target;
-        setData((prev) => ({
-            ...prev,
-            attributes: {
-                ...prev.attributes,
-                [ name ]: value,
-            },
-        }));
-    };
-
-    const handleImagesChange = (index: number, value: string) => {
-        const updatedImages = [ ...data.images ];
-        updatedImages[ index ] = value;
-        setData((prev) => ({
-            ...prev,
-            images: updatedImages,
-        }));
-    };
-
-    const addImageField = () => {
-        setData((prev) => ({
-            ...prev,
-            images: [ ...prev.images, "" ],
-        }));
-    };
+        return errors
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const URL = 'http://localhost:3001/api/v1/create-products/';
-        try {
-            const res = await fetch(URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            const resData = await res.json();
-            setResponse(resData.message);
-            alert(resData.message);
-            window.history.back();
-        } catch (error) {
-            console.error(error);
-        }
-    };
+        const errorValidation = handleErrors();
+        setError(errorValidation);
+        const token = localStorage.getItem('token');
+        const submitUrl = "http://localhost:3001/api/v1/create-products/";
+        const submitOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer: ${token}`
+            },
+            body: JSON.stringify(data),
+        };
+
+        await submitData(submitUrl, submitOptions);
+    }
 
     return (
-        <aside className={style[ 'create-products' ]} >
-            <X className={style[ 'close' ]} onClick={pageBack} />
-            <form onSubmit={handleSubmit} className={style[ 'create-form' ]}>
+        <aside className={style[ "create-products" ]}>
+            <X className={style[ "close" ]} onClick={pageBack} />
+            <Cards className={Style[ "pages" ]}>
+                {message}
+            </Cards>
+            <form onSubmit={handleSubmit} className={style[ "create-form" ]}>
                 <p>Product name</p>
                 <input
                     type="text"
@@ -119,7 +82,6 @@ const Create: React.FC = () => {
                     required
                 />
                 <p>Description</p>
-                <p>Max 200 characters</p><br />
                 <textarea
                     name="description"
                     placeholder="Description"
@@ -127,7 +89,8 @@ const Create: React.FC = () => {
                     onChange={handleChange}
                     required
                 />
-                <p>Products price</p><br />
+                <div>{error.description}</div>
+                <p>Products price</p>
                 <input
                     type="number"
                     name="price"
@@ -144,7 +107,7 @@ const Create: React.FC = () => {
                     required
                 >
                     <option value="">Select a category</option>
-                    {categories.map((category) => (
+                    {categories.data?.map((category) => (
                         <option key={category._id} value={category._id}>
                             {category.name}
                         </option>
@@ -168,8 +131,8 @@ const Create: React.FC = () => {
                     onChange={handleChange}
                     required
                 />
-                <p>Insert URL for images</p><br />
-                <div className={style[ 'add-images' ]}>
+                <p>Insert URL for images</p>
+                <div className={style[ "add-images" ]}>
                     {data.images.map((image, index) => (
                         <div key={index}>
                             <input
@@ -184,7 +147,7 @@ const Create: React.FC = () => {
                         Add URL
                     </button>
                 </div>
-                <p>Product color</p><br />
+                <p>Product color</p>
                 <input
                     type="text"
                     name="color"
@@ -192,7 +155,7 @@ const Create: React.FC = () => {
                     value={data.attributes?.color || ""}
                     onChange={handleAttributesChange}
                 />
-                <p>Product size</p><br />
+                <p>Product size</p>
                 <input
                     type="text"
                     name="weight"
@@ -200,7 +163,7 @@ const Create: React.FC = () => {
                     value={data.attributes?.weight || ""}
                     onChange={handleAttributesChange}
                 />
-                <p>Product dimensions</p><br />
+                <p>Product dimensions</p>
                 <input
                     type="text"
                     name="dimensions"
@@ -208,8 +171,7 @@ const Create: React.FC = () => {
                     value={data.attributes?.dimensions || ""}
                     onChange={handleAttributesChange}
                 />
-
-                <div className={style[ 'save-quit' ]}>
+                <div className={style[ "save-quit" ]}>
                     <button type="submit">Submit</button>
                     <button onClick={pageBack}>Cancel</button>
                 </div>

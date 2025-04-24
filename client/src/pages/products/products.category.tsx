@@ -20,7 +20,7 @@ const ByCategory: React.FC = () => {
                     {data.map((product: IProducts) => (
                         <Cards key={product._id}>
                             <img src={product.images[0]} alt={product.name} />
-                            <h3>{product.name}</h3>
+                            <p>{product.name}</p>
                             <p>{product.description}</p>
                             <p>${product.price}</p>
                         </Cards>

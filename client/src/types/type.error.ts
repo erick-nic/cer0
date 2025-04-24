@@ -6,6 +6,6 @@ export type TErrors = {
         phone?: string,
     },
     "products": {
-        
+        description?: string
     }
 };

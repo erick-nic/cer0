@@ -12,8 +12,8 @@ import Update from "../pages/products/products.update";
 import Delete from "../pages/products/products.delete";
 import Category from "../pages/products/categories";
 import Users from "../pages/navbar/users";
-import Report from "../pages/products/reports/to-excel";
 import ByCategory from "../pages/products/products.category";
+import Reports from "../pages/reports";
 
 const router = createBrowserRouter([ {
     path: "/",
@@ -47,7 +47,7 @@ const router = createBrowserRouter([ {
             ]
         },
         { path: "/products/by-category/:id", element: <ByCategory /> },
-        { path: "/products/reports/to-excel", element: <Report /> },
+        { path: "/report/", element: <Reports /> },
         { path: "users", element: <Users /> },
         { path: "contacts", element: <Contacts /> },
         { path: "about", element: <About /> },

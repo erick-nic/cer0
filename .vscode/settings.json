@@ -125,4 +125,7 @@
     "debug.console.fontSize": 13,
     "debug.console.fontFamily": "Iosevka",
     "debug.enableStatusBarColor": true,
+    "[markdown]": {
+        "editor.defaultFormatter": "denoland.vscode-deno"
+    },
 }

@@ -20,7 +20,7 @@ export const useProductNavigation = () => {
   };
 
   const navigateToReport = () => {
-    navigateTo({ route: '/products/reports/to-excel' });
+    navigateTo({ route: '/products/reports/' });
   };
 
   const navigateToCreateCategory = () => {

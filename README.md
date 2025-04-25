@@ -1,4 +1,5 @@
 ### Practice REST-API
+
 This is a personal practice creating an eCommerce app using the followings
 technologies:
 
@@ -9,13 +10,17 @@ technologies:
 - JWT
 
 ### Why?
-This app will help to get the knowledge about how the technologies works together using APIs.
+
+This app will help to get the knowledge about how the technologies works
+together using APIs.
 
 Still in development...
 
 ### How to use
-Clone the repository `git clone` then split the terminal or open another, the
-repository have two folder server that is the backend and client that is the
+
+Clone the repository `git clone` then split the terminal or open another
+
+the repository have two folder server that is the backend and client that is the
 frontend, `cd client` and install the dependencies `npm install` and `cd server`
 in the other terminal and do the same.
 
@@ -26,26 +31,34 @@ ready to use.
 > [!IMPORTANT]
 > You need to create a .env file for the database and others enviroments
 > variable in both server and client, an example for the server:
-> DATABASE_URI=mongodb://localhost:27017/rest-practice
-> PORT=3001
+> DATABASE_URI=mongodb://localhost:27017/rest-practice PORT=3001
 > PRIVATE_KEY=secret
 
 The server backup You can backup your database data using the comand:
-`npm run backup:ts` this run the collection.ts script that save the documents in each collections for the complete database.
+`npm run backup:ts` this run the collection.ts script that save the documents in
+each collections for the complete database.
 
 Run `npm run backup` in dev mode to make a backup for the database, or
-`npm run backup:json` in production mode, otherwise you can restore the database using `npm run restore`
+`npm run backup:json` in production mode, otherwise you can restore the database
+using `npm run restore`
 
 To run the client can use `npm start` in dev mode or `npm run build` to
 transpile the code from Typescript to Javascript and start the project.
 
 ### Backend
-The entire application uses Typescript and JSON and the controllers endpoints are validated.
 
-The backend have the followings endpoints and user authentication
-using JWT and middleware validator 
+The entire application uses Typescript and JSON and the controllers endpoints
+are validated.
+
+The backend have the followings endpoints and user authentication using JWT and
+middleware validator
+
+> [!NOTE]
+> All endpoints are are funcional but no all are in use 'cause the applications
+> isn't complete yet.
 
 User endponints
+
 - post - /sign-up
 - post - /log-in
 - post - /log-out
@@ -54,6 +67,7 @@ User endponints
 - delete - /delete-user/:id
 
 Products endpoint
+
 - post - /create-products
 - get - /get-products
 - get - /get-products/:id
@@ -62,6 +76,7 @@ Products endpoint
 - delete - /delete-products/:id
 
 Category endpoints
+
 - post - /create-category
 - get - /get-categories
 - get - /get-categories/:id
@@ -69,6 +84,7 @@ Category endpoints
 - delete - /delete-category/:id
 
 ### Frontend
+
 The Client app was made using Typescript applying best practices like:
 
 - Type safety
@@ -86,4 +102,3 @@ And all the components was created from scratch using:
 - Media querys
 
 The client app is intended to be responsive...
-

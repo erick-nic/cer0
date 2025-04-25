@@ -1,6 +1,7 @@
 type ObjectId = string;
 
 export interface IProducts {
+    [ x: string ]: any;
     _id?: ObjectId;
     name: string;
     description: string;

@@ -1,83 +1,74 @@
-import React, { useEffect, useState } from "react";
-import { IProducts } from "../../types/interface.products";
-import style from "../../styles/navbar/products.module.css";
+import React from "react"
 import { Outlet, useLocation } from "react-router-dom";
+import { useProductNavigation } from "../../utils/nav-routes";
+import style from "../../styles/pages/pages.module.css"
 import { Button } from "../../components/labels";
 import { pageBack } from "../../utils/handlers";
-import { useProductNavigation } from "../../utils/nav-routes";
+import useFetchData from "../../hooks/useFetchData";
+import { IProducts } from "../../types/interface.products";
+import Cards from "../../components/cards";
 
 const Products: React.FC = () => {
-  const [ products, setProducts ] = useState<IProducts[]>([]);
-  const [ loading, setLoading ] = useState<boolean>(true);
-  const [ error, setError ] = useState<string | null>(null);
-  const location = useLocation();
-  const {
-    navigateToDetails,
-    navigateToCreateProduct,
-    navigateToUpdateProduct,
-    navigateToDeleteProduct,
-    navigateToReport,
-    navigateToCreateCategory,
-  } = useProductNavigation();
+    const location = useLocation();
+    const isDetailsPage = location.pathname.includes('details');
+    const {
+        navigateToDetails,
+        navigateToCreateProduct,
+        navigateToUpdateProduct,
+        navigateToDeleteProduct,
+        navigateToReport,
+        navigateToCreateCategory,
+    } = useProductNavigation();
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/api/v1/get-products/');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data: IProducts[] = await response.json();
-        setProducts(data);
-      } catch (error) {
-        setError(error instanceof Error ? error.message : 'An unknown error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
+    const { data, error, loading, message } = useFetchData<IProducts>('http://localhost:3001/api/v1/get-products/')
 
-    fetchProducts();
-  }, []);
+    return (
+        <div className={style[ 'pages' ]}>
+            {!isDetailsPage && (
+                <div>
+                    <div>
+                        <Button onClick={() => navigateToCreateProduct(undefined)} value="Create Product" />
+                        <Button onClick={navigateToCreateCategory} value="Create category" />
+                        <Button onClick={navigateToReport} value="Report XLSX" />
+                        <Button onClick={pageBack} value="Back" />
+                    </div>
+                    {loading &&
+                        <Cards>
+                            {loading}
+                        </Cards>
+                    }
+                    {error &&
+                        <Cards>
+                            {error}
+                            {message}
+                        </Cards>
+                    }
 
-  if (loading) return <div className={style[ 'loading' ]}>Loading...</div>;
-  if (error) return <div className={style[ 'error' ]}>Error: {error}</div>;
-  const isDetailsPage = location.pathname.includes('details');
-
-  return (
-    <div className={style[ 'products-page' ]}>
-      {!isDetailsPage && (
-        <div>
-          <div className={style[ 'sub-menu' ]}>
-            <Button onClick={() => navigateToCreateProduct(undefined)} value="Create Product" />
-            <Button onClick={navigateToCreateCategory} value="Create category" />
-            <Button onClick={navigateToReport} value="Report XLSX" />
-            <Button onClick={pageBack} value="Back" />
-          </div>
-          <div className={style[ 'products-cards' ]}>
-            <ul>
-              {products.map((product) => (
-                <li key={product._id}>
-                  <img
-                    src={product.images ? product.images[ 0 ] : undefined}
-                    alt={product.description}
-                    onClick={() => navigateToDetails(product?._id)}
-                  />
-                  <p>Name: {product.name}</p>
-                  <p>Brand: {product.brand}</p>
-                  <p>Price: ${product.price}</p>
-                  <div className={style[ 'buttons' ]}>
-                    <Button onClick={() => navigateToUpdateProduct(product?._id)} value="Update" />
-                    <Button onClick={() => navigateToDeleteProduct(product?._id)} value="Delete" />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+                    {data && (
+                        <div className={style[ 'cards-container' ]}>
+                        {data.map((data: IProducts) => (
+                            <Cards key={data._id}>
+                                <img
+                                    src={data.images ? data.images[ 0 ] : undefined}
+                                    alt={data.description}
+                                    onClick={() => navigateToDetails(data?._id)}
+                                />
+                                <p>Name: {data.name}</p>
+                                <p>Brand: {data.brand}</p>
+                                <p>Price: ${data.price}</p>
+                                <div className={style[ 'buttons' ]}>
+                                    <Button onClick={() => navigateToUpdateProduct(data?._id)} value="Update" />
+                                    <Button onClick={() => navigateToDeleteProduct(data?._id)} value="Delete" />
+                                </div>
+                            </Cards>
+                        ))}
+                        </div>
+                    )}
+                </div>
+            )}
+            <Outlet />
         </div>
-      )}
-      <Outlet />
-    </div>
-  );
-};
+    )
+}
 
 export default Products;

@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App"
 import Home from "../pages/navbar/home";
 import Contacts from "../pages/navbar/contacts";
-import About from "../pages/navbar/about";
 import Signup from "../pages/navbar/signup";
 import Login from "../pages/navbar/login";
 import Products from "../pages/navbar/products";
@@ -13,7 +12,7 @@ import Delete from "../pages/products/products.delete";
 import Category from "../pages/products/categories";
 import Users from "../pages/navbar/users";
 import ByCategory from "../pages/products/products.category";
-import Reports from "../pages/reports";
+import Reports from "../pages/products/reports";
 
 const router = createBrowserRouter([ {
     path: "/",
@@ -43,14 +42,18 @@ const router = createBrowserRouter([ {
                 {
                     path: "create/category",
                     element: <Category />
+                },
+                {
+                    path: "reports",
+                    element: <Reports />
                 }
             ]
         },
         { path: "/products/by-category/:id", element: <ByCategory /> },
-        { path: "/report/", element: <Reports /> },
-        { path: "users", element: <Users /> },
+        {
+            path: "users", element: <Users />
+        },
         { path: "contacts", element: <Contacts /> },
-        { path: "about", element: <About /> },
         { path: "signup", element: <Signup /> },
         { path: "login", element: <Login /> }
     ]

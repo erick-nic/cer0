@@ -34,10 +34,12 @@ const productSchema = new Schema<IProducts>({
     },
     images: {
         type: [ String ],
+        required: false,
         validate: {
             validator: (v: string[]) => v.length > 0,
             message: 'At least one image is required'
-        }
+        },
+        default: ['https://t3.ftcdn.net/jpg/05/04/28/96/240_F_504289605_zehJiK0tCuZLP2MdfFBpcJdOVxKLnXg1.jpg']
     },
     attributes: {
         color: { type: String },

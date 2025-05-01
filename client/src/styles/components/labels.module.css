@@ -3,7 +3,7 @@
 & input {
     font-size: 11pt;
     color: var(--darkModeText);
-    margin: 1rem  0.5rem;
+    margin: 1rem 0.5rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
     border: none;
@@ -28,11 +28,19 @@
     margin: 0.8rem;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    border: var(--darkModeBackground);
-    border: 0.1em solid var(--focusDarkMode);
+    border: 0.1em solid var(--borderDarkModeColor);
 
     &:hover {
-        background-color: var(--darkModeTextHover);
+        background-color: var(--focusDarkMode);
+    }
+}
+
+& .styled-button {
+    background-color: var(--lightModeBackground);
+    color: var(--lightModeText);
+
+    &:hover {
+        background-color: var(--focusLightMode);
     }
 }
 
@@ -52,5 +60,26 @@
     &:focus {
         outline: none;
         border: 0.2em solid var(--focusDarkMode);
+    }
+}
+
+& table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11pt;
+    background-color: var(--darkModeBackground);
+    color: var(--darkModeText);
+    border-radius: 1rem;
+
+    & th {
+        background-color: var(--darkModeBody);
+        color: var(--darkModeText);
+        padding: 0.5rem;
+        border: 1px solid var(--darkModeText);
+    }
+
+    & td {
+        padding: 0.5rem;
+        border: 1px solid var(--darkModeText);
     }
 }

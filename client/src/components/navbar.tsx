@@ -1,7 +1,7 @@
 import React from "react";
 import { FaBars, FaX } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import style from "../styles/navbar.module.css";
+import style from "../styles/components/navbar.module.css";
 import LogoutButton from "./logout";
 import { Button } from "./labels";
 
@@ -25,11 +25,6 @@ const Navbar: React.FC = () => {
           to="/users"
           onClick={toggleNav}>
           Users
-        </Link>
-        <Link
-          to="/about"
-          onClick={toggleNav}>
-          About
         </Link>
         <Link
           to="/contacts"

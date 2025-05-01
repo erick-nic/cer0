@@ -59,7 +59,7 @@ const Details: React.FC = () => {
                 <p>Category: {productDetailed?.category}</p>
                 <p>Description: {productDetailed?.description}</p>
                 <p>Price: ${productDetailed?.price}</p>
-                <p>rating: {productDetailed?.rating}</p>
+                <p>Stock: {productDetailed?.stock}</p>
                 <button onClick={handleClick}>Back</button>
             </div>
         </div>

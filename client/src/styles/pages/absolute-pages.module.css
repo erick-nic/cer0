@@ -1,18 +1,14 @@
-@import '../App.module.css';
-
 .pages {
     position: absolute;
     border-radius: 1rem;
-    width: 20rem;
+    width: auto;
     height: fit-content;
-    max-width: 30rem;
     max-height: auto;
-    margin-right: calc(50% - 10rem);
     background-color: var(--offDarkModeBackground);
     color: var(--darkModeText);
-    top: 0;
-    right: 0;
-    margin-top: 5rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1000;
     border: 0.1rem solid var(--focusDarkMode);
 

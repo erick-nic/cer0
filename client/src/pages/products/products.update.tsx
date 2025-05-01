@@ -1,37 +1,45 @@
 import { useParams } from "react-router-dom";
 import style from "../../styles/pages/absolute-pages.module.css";
-import { useEffect, useState } from "react";
-// import { config } from "../../config";
+import { useState } from "react";
 import { IProducts } from "../../types/interface.products";
 import { Button, Input } from "./../../components/labels";
 import Cards from "../../components/cards";
 import { X } from "lucide-react";
-import { pageBack, pageReload } from "../../utils/handlers";
+import { pageBack } from "../../utils/handlers";
+import { useNavigate } from "react-router-dom";
+import useFetchData from "../../hooks/useFetchData";
 
 const Update: React.FC = () => {
-    const initialState: IProducts = ({
+    const initialState: IProducts = {
         name: '',
         description: '',
         price: 0,
         category: '',
         brand: '',
         stock: 0,
-        images: [ '' ],
+        images: [''],
         attributes: {},
         rating: undefined,
         reviews: [],
-    });
+    };
 
     const { id } = useParams<{ id: string }>();
-    // const getProducts: string = config.getProducts;
-    const URL = `${'http://localhost:3001/api/v1/update-products'}/${id}`;
-    const [ error, setError ] = useState<string | null>(null);
-    const [ products, setProducts ] = useState<IProducts>(initialState);
-    const [ loading, setLoading ] = useState(true);
+    const URL = `http://localhost:3001/api/v1/update-products/${id}`;
+    const navigate = useNavigate();
+
+    const [products, setProducts] = useState<IProducts>(initialState);
+    const { data, loading, error, message } = useFetchData<IProducts[]>(`http://localhost:3001/api/v1/get-products`);
+
+    if (data && !loading && !error) {
+        const product = data.find((p) => p._id === id);
+        if (product && products._id !== product._id) {
+            setProducts(product);
+        }
+    }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setProducts({ ...products, [ name ]: value });
+        setProducts({ ...products, [name]: value });
     };
 
     const handleSubmit = async (event: React.FormEvent) => {
@@ -39,7 +47,8 @@ const Update: React.FC = () => {
 
         const token = localStorage.getItem('token');
         if (!token) {
-            setError('No authentication token found');
+            alert('No authentication token found');
+            navigate('/login');
             return;
         }
 
@@ -48,11 +57,11 @@ const Update: React.FC = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify(products),
                 mode: 'cors',
-                credentials: 'include'
+                credentials: 'include',
             });
 
             if (!response.ok) {
@@ -60,44 +69,21 @@ const Update: React.FC = () => {
             }
 
             alert('Product updated successfully!');
+            pageBack();
         } catch (error) {
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            console.error(error);
         }
     };
 
-
-    useEffect(() => {
-        const productData = async () => {
-            try {
-                const data = await fetch('http://localhost:3001/api/v1/get-products');
-                if (!data.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const product: IProducts[] = await data.json();
-                const productId = product.find((p) => p._id === id);
-                if (!productId) {
-                    throw new Error('Product not found');
-                }
-                setProducts(productId);
-                setLoading(false);
-            } catch (error) {
-                setError(error instanceof Error ? error.message : 'An unknown error occurred');
-                setLoading(false);  
-            }
-        };
-        productData();
-    }, [ id ]);
-
-    if (error) return <div className={style[ 'error' ]}>Error: {error}</div>;
+    if (loading) return <div className={style['loading']}>Loading...</div>;
+    if (error) return <div className={style['error']}>Error: {error}</div>;
 
     return (
-        <div className={style[ 'pages' ]}>
+        <div className={style['pages']}>
             <Cards>
+                {message}
                 <form onSubmit={handleSubmit}>
-                    <X
-                        className={style[ 'close' ]}
-                        onClick={pageBack}
-                    />
+                    <X className={style['close']} onClick={pageBack} />
                     <Input
                         name="name"
                         value={products.name}
@@ -130,25 +116,21 @@ const Update: React.FC = () => {
                     />
                     <Input
                         name="images"
-                        value={products.images[ 0 ]}
+                        value={products.images[0]}
                         onChange={handleChange}
-                        placeholder={products.images[ 0 ]}
+                        placeholder={products.description}
                     />
                     <Input
-                        name="rating"
-                        value={products.rating}
+                        name="stock"
+                        value={products.stock}
                         onChange={handleChange}
-                        placeholder={String(products.rating)}
+                        placeholder={String(products.stock)}
                     />
-                    <Button
-                        type="submit"
-                        value="Update"
-                        onClick={pageReload}
-                    />
+                    <Button type="submit" value="Update" />
                 </form>
             </Cards>
-        </div >
+        </div>
     );
-}
+};
 
 export default Update;

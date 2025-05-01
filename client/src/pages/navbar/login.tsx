@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import IUsers from "../../types/interface.user";
 import { TErrors } from "../../types/type.error";
 import { config } from "../../config";
+import { pageBack } from "../../utils/handlers";
 
 const Login: React.FC = () => {
   const initalState: IUsers = {
@@ -64,7 +65,7 @@ const Login: React.FC = () => {
           console.log(newData.token);
           localStorage.setItem('token', newData.token);
           setTimeout(() => {
-            navigate('/');
+            pageBack();
           }, 2000);
         } else {
           console.log('token not recived');

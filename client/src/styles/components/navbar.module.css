@@ -1,4 +1,4 @@
-@import '../styles/App.module.css';
+@import '../App.module.css';
 
 header {
     background-color: var(--darkModeBackground);

@@ -1,8 +1,9 @@
 import React from 'react';
-import style from "../../../styles/products/reports/to-excel.module.css";
+import style from "../styles/pages/pages.module.css";
 import { exportToExcel } from './export-to-excel';
 import { pageBack } from './handlers';
 import useFetchData from '../hooks/useFetchData';
+import { Button } from '../components/labels';
 
 interface ReportProps<T> {
     endpoint: string;
@@ -21,11 +22,11 @@ const Report = <T,>({ endpoint, columns, mapDataToRow, fileName }: ReportProps<T
     };
 
     return (
-        <div className={style['products-reports']}>
+        <div className={style[ 'pages' ]}>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            <button onClick={pageBack}>Back</button>
-            <button onClick={handleExport}>Export to XLSX</button>
+            <Button value="Back" onClick={pageBack} />
+            <Button value="Export" onClick={handleExport} />
             {!loading && !error && data && (
                 <table>
                     <thead>

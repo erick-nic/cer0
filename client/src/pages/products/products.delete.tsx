@@ -33,7 +33,7 @@ const Delete: React.FC = () => {
                         <p>Error: {response.error}</p>
                     ) : (
                         <div>
-                            <p>{JSON.stringify(response.data)}</p>
+                            <p>{JSON.stringify(response.message)}</p>
                         </div>
                     )
                 }

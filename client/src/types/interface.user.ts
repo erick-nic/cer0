@@ -1,6 +1,9 @@
+import { JSX } from "react/jsx-runtime";
+
 type ObjectId = string;
 
 interface IUsers {
+    [ x: string ]: any;
     _id?: ObjectId,
     name: string,
     email: string,

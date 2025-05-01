@@ -7,11 +7,13 @@
     font-size: 11pt;
     width: auto;
     height: auto;
-    padding: 1rem;
+    max-height: 33em;
+    padding: 1rem ;
     margin: 1rem;
     border-radius: 1rem;
     border-color: var(--darkModeColor);
     background-color: var(--offDarkModeBackground);
+    overflow-y: hidden;
 
     & img {
         border-radius: 1rem;

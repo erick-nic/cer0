@@ -8,16 +8,17 @@
     --darkModeBackground: #080808;
     --darkModeBody: #0C0C0F;
     --darkModeText: #e9e6e6;
-    --darkModeTextHover: #f7f7f7;
+    --darkModeTextHover: #ccccccd2;
     --darkModeBackgroundContrast: #e0e0db;
     --darkModeTextContrast: #183032;
     --lightModeBackground: #ffffff;
     --lightModeText: #121213;
-    --offDarkModeBackground: #1d1d1d;
+    --borderDarkModeColor: #686666;
+    --offDarkModeBackground: #2b2a2a;
     --errorColor: #ff3535ef;
     --darkModeCard: #181717;
     --focusDarkMode: #242222;
-    --focusLightMode: #eeeded;
+    --focusLightMode: #c5c3c3;
     --scrollbarColor: #46466b;
     --scrollbarColorHover: #4d4d80;
 }
@@ -28,4 +29,5 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    font-size: 11pt
 }   

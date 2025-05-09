@@ -4,9 +4,15 @@ This is a personal practice creating an eCommerce app using the followings
 technologies:
 
 - Node.js (Express.js)
+>[!NOTE]
+> You can download the lates version here [TEXT](https://nodejs.org/dist/v22.15.0/node-v22.15.0-x64.msi)
+
 - React.js
 - Typescript
 - MongoDB (Mongoose)
+>[!NOTE]
+> You can download the lates version here [TEXT](https://downloads.mongodb.com/compass/mongodb-compass-1.46.2-win32-x64.exe)
+
 - JWT
 
 ### Why?
@@ -41,6 +47,9 @@ each collections for the complete database.
 Run `npm run backup` in dev mode to make a backup for the database, or
 `npm run backup:json` in production mode, otherwise you can restore the database
 using `npm run restore`
+
+> [!IMPORTANT]
+> You need to have installed the MongoDB Database Tools if you not have it you can download from here [text](https://fastdl.mongodb.org/tools/db/mongodb-database-tools-windows-x86_64-100.11.0.msi)
 
 To run the client can use `npm start` in dev mode or `npm run build` to
 transpile the code from Typescript to Javascript and start the project.

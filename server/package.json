@@ -9,40 +9,40 @@
     "email": "erick.dev.en@outlook.com"
   },
   "scripts": {
+    "restore": "mongorestore --nsInclude=rest-practice.* --drop src/backup/rest-practice",    
     "backup": "mongodump /db:rest-practice --out src/backup",
-    "restore": "mongorestore /db:rest-practice --drop src/backup/api-database",
     "backup:ts": "tsx src/backup/collections.ts",
+    "backup:json": "tsc && node src/backup/collections.js",
     "build": "tsc",
     "start": "tsx dist/app.js",
     "dev": "nodemon",
-    "dev:tsx": "tsx --watch src/app.ts",
-    "backup:json": "tsc && node src/backup/collections.js"
+    "dev:tsx": "tsx --watch src/app.ts"
   },
   "license": "MIT",
   "dependencies": {
-    "cookie-parser": "^1.4.6",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.6.3",
+    "mongoose": "^8.14.2",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.10"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
-    "@types/cookie-parser": "^1.4.7",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
-    "@types/jsonwebtoken": "^9.0.7",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.9",
-    "@types/node": "^22.6.1",
-    "@types/nodemon": "^1.19.6",
+    "@types/node": "^22.15.17",
+    "@types/nodemon": "^3.1.1",
     "bcrypt": "^5.1.1",
     "cross-env": "^7.0.3",
     "tsconfig-paths": "^4.2.0",
-    "tsx": "^4.19.1",
-    "typescript": "^5.6.2"
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
   }
 }

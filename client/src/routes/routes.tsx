@@ -13,6 +13,8 @@ import ByCategory from "../pages/products/products.category";
 import Reports from "../pages/products/reports";
 import UpdateUser from "../pages/users/user.update";
 import Users from "../pages/navbar/users";
+import DeleteUser from "../pages/users/user.delete";
+import ReportsUsers from "../pages/users/user.report";
 
 const router = createBrowserRouter([ {
     path: "/",
@@ -59,7 +61,11 @@ const router = createBrowserRouter([ {
                 },
                 {
                     path: "delete/:id",
-                    element: <Delete />
+                    element: <DeleteUser />
+                },
+                {
+                    path: "reports",
+                    element: <ReportsUsers />
                 },
             ]
         },

@@ -1,7 +1,7 @@
 @import '../App.module.css';
 
 .pages {
-    font-size: 9pt;
+    font-size: 11pt;
     display: block;
     color: var(--darkModeText);
 

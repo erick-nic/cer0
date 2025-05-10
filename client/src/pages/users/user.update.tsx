@@ -1,45 +1,67 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { IProducts } from '../../types/interface.products';
 import { Button, Input } from '../../components/labels';
 import Cards from '../../components/cards';
 import { X } from 'lucide-react';
 import { pageBack } from '../../utils/handlers';
 import useFetchData from '../../hooks/useFetchData';
 import style from '../../styles/pages/absolute-pages.module.css';
+import IUsers from '../../types/interface.user';
 
 const UpdateUser = () => {
-    const initialState: IProducts = {
-        name: '',
-        description: '',
-        price: 0,
-        category: '',
-        brand: '',
-        stock: 0,
-        images: [ '' ],
-        attributes: {},
-        rating: undefined,
-        reviews: [],
+    const initialState: IUsers = {
+        email: '',
+        password: '',
+        address: {
+            street: '',
+            city: '',
+            state: '',
+            postalCode: ''
+        },
+        phone: '',
     };
 
     const { id } = useParams<{ id: string }>();
     const URL = `http://localhost:3001/api/v0/update-user/${id}`;
     const navigate = useNavigate();
 
-    const [ user, setUser ] = useState<IProducts>(initialState);
-    const { data, loading, error } = useFetchData<IProducts[]>(`http://localhost:3001/api/v0/users/`);
+    const [ user, setUser ] = useState<IUsers>(initialState);
+    const { data, loading, error } = useFetchData<IUsers[]>(`http://localhost:3001/api/v0/users`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+        mode: 'cors',
+        credentials: 'include',
+    });
     const [ message, setMessage ] = useState<string | null>(null);
 
     if (data && !loading && !error) {
-        const userData = data.find((u) => u._id === id);
-        if (userData && user._id !== userData._id) {
-            setUser(userData);
+        const user = data.find((u) => u._id === id);
+        if (user && user._id !== id) {
+            setUser(user);
         }
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setUser({ ...user, [ name ]: value });
+        setUser((prevData) => {
+            if (name in prevData.address) {
+                return {
+                    ...prevData,
+                    address: {
+                        ...prevData.address,
+                        [ name ]: value,
+                    },
+                };
+            } else {
+                return {
+                    ...prevData,
+                    [ name ]: value,
+                };
+            }
+        });
     };
 
     const handleSubmit = async (event: React.FormEvent) => {
@@ -87,54 +109,54 @@ const UpdateUser = () => {
             <Cards>
                 <form onSubmit={handleSubmit}>
                     <X className={style[ 'close' ]} onClick={pageBack} />
-                    <label htmlFor={user._id}>Name:</label>
+                    <label htmlFor="email">Email:</label>
                     <Input
-                        name="name"
-                        value={user.name}
+                        name="email"
+                        value={user.email}
                         onChange={handleChange}
-                        placeholder={user.name}
+                        placeholder={user.email}
                     />
-                    <label htmlFor="description">Description:</label>
+                    <label htmlFor="password">Price:</label>
                     <Input
-                        name="description"
-                        value={user.description}
+                        name="password"
+                        value={user.password}
                         onChange={handleChange}
-                        placeholder={user.description}
+                        placeholder={user.password}
                     />
-                    <label htmlFor="price">Price:</label>
+                    <label htmlFor="phone">Phone:</label>
                     <Input
-                        name="price"
-                        value={user.price}
+                        name="phone"
+                        value={user.phone}
                         onChange={handleChange}
-                        placeholder={String(user.price)}
+                        placeholder={user.phone}
                     />
-                    <label htmlFor="category">Category:</label>
+                    <label htmlFor="street">Street:</label>
                     <Input
-                        name="category"
-                        value={user.category}
+                        name="street"
+                        value={user.address.street}
                         onChange={handleChange}
-                        placeholder={user.category}
+                        placeholder={user.address.street}
                     />
-                    <label htmlFor="brand">Brand:</label>
+                    <label htmlFor="city">City:</label>
                     <Input
-                        name="brand"
-                        value={user.brand}
+                        name="city"
+                        value={user.address.city}
                         onChange={handleChange}
-                        placeholder={user.brand}
+                        placeholder={user.address.city}
                     />
-                    <label htmlFor="images">Images:</label>
+                    <label htmlFor="state">State:</label>
                     <Input
-                        name="images"
-                        value={user.images[ 0 ]}
+                        name="state"
+                        value={user.address.state}
                         onChange={handleChange}
-                        placeholder={user.images[ 0 ]}
+                        placeholder={user.address.state}
                     />
-                    <label htmlFor="stock">Stock:</label>
+                    <label htmlFor="postalCode">Postal Code:</label>
                     <Input
-                        name="stock"
-                        value={user.stock}
+                        name="postalCode"
+                        value={user.address.postalCode}
                         onChange={handleChange}
-                        placeholder={String(user.stock)}
+                        placeholder={user.address.postalCode}
                     />
                     <div className={style[ 'response' ]}>
                         {message}

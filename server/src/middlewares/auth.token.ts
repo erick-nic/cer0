@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 import Users from '../models/users.model';
 import { blacklist } from '../controllers/users.controller';
-import IUsers from '../interfaces/users.interface';
 
 dotenv.config();
 declare global {

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import style from "../../styles/pages/pages.module.css"
 import IUsers from "../../types/interface.user";
 import useFetchData from "../../hooks/useFetchData";
@@ -17,6 +16,8 @@ const Users = () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
+        mode: 'cors',
+        credentials: 'include',
     });
 
     const updateUser = async (id: string) => {
@@ -27,11 +28,16 @@ const Users = () => {
         navigate(`/users/delete/${id}`);
     }
 
+    const report = async () => {
+        navigate(`/users/reports`);
+    }
+
     return (
         <div className={style[ 'pages' ]}>
             <div>
                 <div>
                     <Button onClick={pageBack} value="Back" />
+                    <Button onClick={report} value="Report" />
                 </div>
                 {loading && (
                     <Cards>
@@ -45,7 +51,7 @@ const Users = () => {
                     </Cards>
                 )}
                 {data && (
-                    <div className={style[ 'cards' ]}>
+                    <div className={style[ 'cards-container' ]}>
                         {data.map((data: IUsers) => (
                             <Cards key={data._id}>
                                 <p>_id: {data._id}</p>
@@ -53,6 +59,10 @@ const Users = () => {
                                 <p>Email: {data.email}</p>
                                 <p>Password: {data.password}</p>
                                 <p>Phone: {data.phone}</p>
+                                <p>City: {data.address.city}</p>
+                                <p>State: {data.address.state}</p>
+                                <p>Street: {data.address.street}</p>
+                                <p>Postal Code: {data.address.postalCode}</p>
                                 <div className={style[ 'buttons' ]}>
                                     <Button onClick={() => data._id && updateUser(data._id)} value="Update" />
                                     <Button onClick={() => data._id && deleteUser(data._id)} value="Delete" />
@@ -61,10 +71,10 @@ const Users = () => {
                         ))}
                     </div>
                 )}
+                </div>
                 <Outlet />
-            </div>
         </div>
-    )
-}
+    );
+};
 
 export default Users;

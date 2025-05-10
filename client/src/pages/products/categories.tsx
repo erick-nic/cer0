@@ -2,7 +2,6 @@ import { X } from 'lucide-react';
 import style from "../../styles/pages/absolute-pages.module.css";
 import { useState } from 'react';
 import ICategory from '../../types/interface.category';
-import Cards from '../../components/cards';
 import { Button, Input } from '../../components/labels';
 
 const Category = () => {
@@ -52,7 +51,6 @@ const Category = () => {
 
     return (
         <div className={style[ 'pages' ]}>
-            <Cards>
                 <div className={style[ 'response' ]} >
                     {response}
                 </div>
@@ -85,7 +83,6 @@ const Category = () => {
                         value="Create"
                     />
                 </form>
-            </Cards>
         </div>
     );
 };

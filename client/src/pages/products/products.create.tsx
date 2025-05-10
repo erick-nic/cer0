@@ -6,10 +6,11 @@ import { X } from "lucide-react";
 import ICategory from "../../types/interface.category";
 import useFetchData from "../../hooks/useFetchData";
 import { useFormHandlers } from "../../hooks/useFormHandlers";
-import { pageBack } from "../../utils/handlers";
+import { pageBack, pageReload } from "../../utils/handlers";
 import useSubmitData from "../../hooks/useSubmitData";
 import { TErrors } from "../../types/type.error";
 import Cards from "../../components/cards";
+import { Button, Input } from "../../components/labels";
 
 const Create: React.FC = () => {
     const initialState: IProducts = {
@@ -61,122 +62,123 @@ const Create: React.FC = () => {
             },
             body: JSON.stringify(data),
         };
-
+        pageBack();
+        pageReload();
         await submitData(submitUrl, submitOptions);
     }
 
     return (
         <aside className={style[ "create-products" ]}>
-            <X className={style[ "close" ]} onClick={pageBack} />
-            <Cards className={Style[ "pages" ]}>
-                {message}
+            <Cards>
+                <X className={style[ "close" ]} onClick={pageBack} />
+                <form onSubmit={handleSubmit} className={style[ "create-form" ]}>
+                    <p>Product name</p>
+                    <Input
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        value={data.name}
+                        onChange={handleChange}
+                        required
+                    />
+                    <p>Description</p>
+                    <textarea
+                        name="description"
+                        placeholder="Description"
+                        value={data.description}
+                        onChange={handleChange}
+                        required
+                    />
+                    <div>{error.description}</div>
+                    <p>Products price</p>
+                    <input
+                        type="number"
+                        name="price"
+                        placeholder="Price"
+                        value={data.price}
+                        onChange={handleChange}
+                        required
+                    />
+                    <p>Category</p>
+                    <select
+                        name="category"
+                        value={data.category}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Select a category</option>
+                        {categories.data?.map((category) => (
+                            <option key={category._id} value={category._id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                    <p>Brand</p>
+                    <input
+                        type="text"
+                        name="brand"
+                        placeholder="Brand"
+                        value={data.brand}
+                        onChange={handleChange}
+                        required
+                    />
+                    <p>Stock</p>
+                    <input
+                        type="number"
+                        name="stock"
+                        placeholder="Stock"
+                        value={data.stock}
+                        onChange={handleChange}
+                        required
+                    />
+                    <p>Insert URL for images</p>
+                    <div className={style[ "add-images" ]}>
+                        {data.images.map((image, index) => (
+                            <div key={index}>
+                                <input
+                                    type="text"
+                                    placeholder={`Image URL ${index + 1}`}
+                                    value={image}
+                                    onChange={(e) => handleImagesChange(index, e.target.value)}
+                                />
+                            </div>
+                        ))}
+                        <button type="button" onClick={addImageField}>
+                            Add URL
+                        </button>
+                    </div>
+                    <p>Product color</p>
+                    <input
+                        type="text"
+                        name="color"
+                        placeholder="Color"
+                        value={data.attributes?.color || ""}
+                        onChange={handleAttributesChange}
+                    />
+                    <p>Product size</p>
+                    <input
+                        type="text"
+                        name="weight"
+                        placeholder="Weight"
+                        value={data.attributes?.weight || ""}
+                        onChange={handleAttributesChange}
+                    />
+                    <p>Product dimensions</p>
+                    <input
+                        type="text"
+                        name="dimensions"
+                        placeholder="Dimensions"
+                        value={data.attributes?.dimensions || ""}
+                        onChange={handleAttributesChange}
+                    />
+                    <Cards className={Style[ "pages" ]}>
+                        {message}
+                    </Cards>
+                       <Button value="Save" onClick={handleSubmit}/>
+                       <Button value="Cancel" onClick={pageBack}/>
+                </form>
             </Cards>
-            <form onSubmit={handleSubmit} className={style[ "create-form" ]}>
-                <p>Product name</p>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    value={data.name}
-                    onChange={handleChange}
-                    required
-                />
-                <p>Description</p>
-                <textarea
-                    name="description"
-                    placeholder="Description"
-                    value={data.description}
-                    onChange={handleChange}
-                    required
-                />
-                <div>{error.description}</div>
-                <p>Products price</p>
-                <input
-                    type="number"
-                    name="price"
-                    placeholder="Price"
-                    value={data.price}
-                    onChange={handleChange}
-                    required
-                />
-                <p>Category</p>
-                <select
-                    name="category"
-                    value={data.category}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="">Select a category</option>
-                    {categories.data?.map((category) => (
-                        <option key={category._id} value={category._id}>
-                            {category.name}
-                        </option>
-                    ))}
-                </select>
-                <p>Brand</p>
-                <input
-                    type="text"
-                    name="brand"
-                    placeholder="Brand"
-                    value={data.brand}
-                    onChange={handleChange}
-                    required
-                />
-                <p>Stock</p>
-                <input
-                    type="number"
-                    name="stock"
-                    placeholder="Stock"
-                    value={data.stock}
-                    onChange={handleChange}
-                    required
-                />
-                <p>Insert URL for images</p>
-                <div className={style[ "add-images" ]}>
-                    {data.images.map((image, index) => (
-                        <div key={index}>
-                            <input
-                                type="text"
-                                placeholder={`Image URL ${index + 1}`}
-                                value={image}
-                                onChange={(e) => handleImagesChange(index, e.target.value)}
-                            />
-                        </div>
-                    ))}
-                    <button type="button" onClick={addImageField}>
-                        Add URL
-                    </button>
-                </div>
-                <p>Product color</p>
-                <input
-                    type="text"
-                    name="color"
-                    placeholder="Color"
-                    value={data.attributes?.color || ""}
-                    onChange={handleAttributesChange}
-                />
-                <p>Product size</p>
-                <input
-                    type="text"
-                    name="weight"
-                    placeholder="Weight"
-                    value={data.attributes?.weight || ""}
-                    onChange={handleAttributesChange}
-                />
-                <p>Product dimensions</p>
-                <input
-                    type="text"
-                    name="dimensions"
-                    placeholder="Dimensions"
-                    value={data.attributes?.dimensions || ""}
-                    onChange={handleAttributesChange}
-                />
-                <div className={style[ "save-quit" ]}>
-                    <button type="submit">Submit</button>
-                    <button onClick={pageBack}>Cancel</button>
-                </div>
-            </form>
-        </aside>
+        </aside >
     );
 };
 

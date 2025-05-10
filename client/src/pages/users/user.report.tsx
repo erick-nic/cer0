@@ -1,4 +1,4 @@
-import style from "../../styles/pages/pages.module.css"
+import style from "../../styles/pages/pages.module.css";
 import IUsers from "../../types/interface.user";
 import Report from "../../utils/generate-reports";
 
@@ -17,10 +17,21 @@ const ReportsUsers: React.FC = () => {
         </>
     );
 
+    const endpoint = {
+        url: "http://localhost:3001/api/v0/users/",
+        options: {
+            method: "GET",
+            headers: {
+                'Content-Type': "application/json",
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+        },
+    };
+
     return (
         <div className={style[ 'pages' ]}>
             <Report
-                endpoint="http://localhost:3001/api/v1/users/"
+                endpoint={endpoint}
                 columns={columns}
                 mapDataToRow={mapDataToRow}
                 fileName="users_report"

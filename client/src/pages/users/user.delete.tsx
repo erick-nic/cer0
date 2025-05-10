@@ -5,18 +5,19 @@ import Cards from "../../components/cards";
 import { X } from "lucide-react";
 import { Button } from "../../components/labels";
 
-const Delete: React.FC = () => {
+const DeleteUser: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const URL = `http://localhost:3001/api/v1/delete-products/${id}`;
-
+    const URL = `http://localhost:3001/api/v0/delete-user/${id}`;
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         const token = localStorage.getItem('token');
+
         if (!token) {
             alert('No authentication token found');
             return;
         }
+
         try {
             const res = await fetch(URL, {
                 method: 'DELETE',
@@ -28,34 +29,36 @@ const Delete: React.FC = () => {
                 credentials: 'include',
             });
             if (res.ok) {
-                alert('Product deleted successfully');
+                alert('User deleted successfully');
                 pageBack();
             } else {
-                alert('Failed to delete product');
+                alert('Failed to delete user');
             }
         } catch (error) {
-            console.error('Error deleting product:', error);
+            console.error('Error deleting user:', error);
         }
     }
 
     return (
         <div className={style[ 'pages' ]}>
-            <X
-                className={style[ 'close' ]}
-                onClick={pageBack}
-            />
-            <form>
-                <label htmlFor="delete">
-                    Are you sure you want to delete this product?
-                </label>
-                <Button
-                    value="Delete"
-                    onClick={handleSubmit}
-                    type="submit"
+            <Cards>
+                <X
+                    className={style[ 'close' ]}
+                    onClick={pageBack}
                 />
-            </form>
+                <form>
+                    <label htmlFor="delete">
+                        Are you sure you want to delete this user?
+                    </label>
+                    <Button
+                        value="Delete"
+                        onClick={handleSubmit}
+                        type="submit"
+                    />
+                </form>
+            </Cards>
         </div>
     )
 }
 
-export default Delete
+export default DeleteUser;

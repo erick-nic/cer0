@@ -5,15 +5,17 @@ import { pageBack } from './handlers';
 import useFetchData from '../hooks/useFetchData';
 import { Button } from '../components/labels';
 
+interface FetchOptions extends RequestInit { }
+
 interface ReportProps<T> {
-    endpoint: string;
+    endpoint: { url: string; options?: FetchOptions };
     columns: string[];
     mapDataToRow: (item: T) => React.ReactNode;
     fileName: string;
 }
 
-const Report = <T,>({ endpoint, columns, mapDataToRow, fileName }: ReportProps<T>) => {
-    const { data, loading, error } = useFetchData<T[]>(endpoint);
+const Report = <T,>({ endpoint: { url, options }, columns, mapDataToRow, fileName }: ReportProps<T>) => {
+    const { data, loading, error } = useFetchData<T[]>(url, options);
 
     const handleExport = () => {
         if (data) {

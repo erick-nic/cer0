@@ -18,13 +18,23 @@ const Reports: React.FC = () => {
         </>
     );
 
+    const endpoint = {
+        url: "http://localhost:3001/api/v1/get-products/",
+        options: {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        },
+    };
+
     return (
         <div className={style[ 'pages' ]}>
             <Report
-                endpoint="http://localhost:3001/api/v1/get-products/"
+                endpoint={endpoint}
                 columns={columns}
                 mapDataToRow={mapDataToRow}
-                fileName="Products_Report"
+                fileName="products_report"
             />
         </div>
     );

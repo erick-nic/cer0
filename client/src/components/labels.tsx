@@ -9,6 +9,7 @@ type Props = {
     className?: string;
     type?: HTMLInputTypeAttribute;
     placeholder?: string;
+    required?: boolean;
 }
 
 const Button: React.FC<Props> = ({ name, onClick, value, className }) => {
@@ -49,7 +50,7 @@ const Select: React.FC<Props> = ({ name, onClick, onChange, value, className }) 
     )
 }
 
-const Input: React.FC<Props> = ({ name, onClick, onChange, value, className, type, placeholder }) => {
+const Input: React.FC<Props> = ({ name, onClick, onChange, required, className, type, placeholder }) => {
     return (
         <input
             type={type}
@@ -58,7 +59,7 @@ const Input: React.FC<Props> = ({ name, onClick, onChange, value, className, typ
             onChange={onChange}
             name={name}
             placeholder={placeholder}
-
+            required={required}
         >
         </input>
     )

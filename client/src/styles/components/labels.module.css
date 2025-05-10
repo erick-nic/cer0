@@ -10,7 +10,7 @@
     background-color: var(--darkModeBackground);
     transition: 3.8rem 0.5s ease-in;
     width: 13rem;
-    border: 0.1em solid var(--focusDarkMode);
+    border: 0.1em solid var(--borderDarkModeColor);
 
     &:focus {
         outline: none;
@@ -55,7 +55,7 @@
     transition: 3.8rem 0.5s ease-in;
     width: 13rem;
     max-width: 100vh;
-    border: 0.1em solid var(--focusDarkMode);
+    border: 0.1em solid var(--borderDarkModeColor);
 
     &:focus {
         outline: none;
@@ -81,5 +81,23 @@
     & td {
         padding: 0.5rem;
         border: 1px solid var(--darkModeText);
+    }
+}
+
+& select {
+    font-size: 11pt;
+    color: var(--darkModeText);
+    margin: 1rem 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: var(--darkModeBackground);
+    transition: 3.8rem 0.5s ease-in;
+    width: 13rem;
+    border: 0.1em solid var(--borderDarkModeColor);
+    
+    &:focus {
+        outline: none;
+        border: 0.2em solid var(--focusDarkMode);
     }
 }

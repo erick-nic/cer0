@@ -5,7 +5,7 @@ type ObjectId = string;
 interface IUsers {
     [ x: string ]: any;
     _id?: ObjectId,
-    name: string,
+    name?: string,
     email: string,
     password: string,
     address: {

@@ -3,13 +3,13 @@
     border-radius: 1rem;
     width: auto;
     height: auto;
-    background-color: var(--offDarkModeBackground);
+    background-color: var(--darkModeBackground);
     color: var(--darkModeText);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    border: 0.1rem solid var(--focusDarkMode);
+    border: 0.1em solid var(--borderDarkModeColor);
     overflow-y: auto;
 
     & .response {

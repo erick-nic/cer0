@@ -1,7 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
 import style from "../../styles/pages/pages.module.css";
+import Style from "../../styles/pages/absolute-pages.module.css";
 import { useEffect, useState } from "react";
 import { IProducts } from "../../types/interface.products";
+import { pageBack } from "../../utils/handlers";
+import { X } from "lucide-react";
+import { Button } from "../../components/labels";
+import Cards from "../../components/cards";
 
 const Details: React.FC = () => {
     const initialState: IProducts = ({
@@ -40,25 +45,23 @@ const Details: React.FC = () => {
         fetchData();
     }, [ id ]);
 
-    const handleClick = () => {
-        window.history.back();
-    }
-
     if (error) return <div className={style[ 'error' ]}>Error: {error}</div>;
 
     return (
         <div className={style[ 'pages' ]}>
-            <img src={productDetailed?.images ? productDetailed.images[ 0 ] : undefined}
-                alt={productDetailed?.description}
-                width={500} height={500} />
-            <div className={style[ 'details' ]}>
-                <p>_id: {productDetailed?._id}</p>
-                <p>Brand: {productDetailed?.brand}</p>
-                <p>Category: {productDetailed?.category}</p>
-                <p>Description: {productDetailed?.description}</p>
-                <p>Price: ${productDetailed?.price}</p>
-                <p>Stock: {productDetailed?.stock}</p>
-                <button onClick={handleClick}>Back</button>
+            <div className={style[ 'cards-container' ]}>
+                <Cards>
+                    <img src={productDetailed?.images ? productDetailed.images[ 0 ] : undefined}
+                        alt={productDetailed?.description}
+                        width={500} height={500} />
+                    <p>_id: {productDetailed?._id}</p>
+                    <p>Brand: {productDetailed?.brand}</p>
+                    <p>Category: {productDetailed?.category}</p>
+                    <p>Description: {productDetailed?.description}</p>
+                    <p>Price: ${productDetailed?.price}</p>
+                    <p>Stock: {productDetailed?.stock}</p>
+                    <Button onClick={pageBack} value="Back" />
+                </Cards>
             </div>
         </div>
     );

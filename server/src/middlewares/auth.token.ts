@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import Users from '../models/users.model';
 import { blacklist } from '../controllers/users.controller';
 import IUsers from '../interfaces/users.interface';
+
 dotenv.config();
 declare global {
     namespace Express {
@@ -13,7 +14,7 @@ declare global {
     }
 }
 
-export const authToken = async (req: Request, res: Response, next: NextFunction): Promise<unknown> => {
+export const authToken = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     const authHeader = req.headers[ 'authorization' ];
     const token = authHeader?.split(' ')[ 1 ];
     console.log({ message: 'token received', token });

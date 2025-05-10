@@ -9,9 +9,8 @@
     "email": "erick.dev.en@outlook.com"
   },
   "scripts": {
-    "restore": "mongorestore --nsInclude=rest-practice.* --drop src/backup/rest-practice",    
-    "backup": "mongodump /db:rest-practice --out src/backup",
-    "backup:ts": "tsx src/backup/collections.ts",
+    "restore": "mongorestore --nsInclude=rest-practice.* --drop src/backup/",    
+    "backup": "mongodump --uri=\"mongodb://localhost:27017/rest-practice\" --out=src/backup",    "backup:ts": "tsx src/backup/collections.ts",
     "backup:json": "tsc && node src/backup/collections.js",
     "build": "tsc",
     "start": "tsx dist/app.js",

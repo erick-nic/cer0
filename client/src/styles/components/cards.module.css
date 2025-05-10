@@ -1,19 +1,16 @@
 @import "../../styles/App.module.css";
 
 .cards {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     font-size: 11pt;
     width: auto;
     height: auto;
     max-height: 33em;
-    padding: 1rem ;
+    padding: 1rem;
     margin: 1rem;
     border-radius: 1rem;
     border-color: var(--darkModeColor);
     background-color: var(--offDarkModeBackground);
-    overflow-y: hidden;
+    overflow-y: unset;
 
     & img {
         border-radius: 1rem;
@@ -24,5 +21,23 @@
         height: auto;
         cursor: pointer;
         margin-top: 0.5rem;
+    }
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--offDarkModeBackground);
+        border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--darkModeColor);
+        border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: lighten(var(--darkModeColor), 10%);
     }
 }

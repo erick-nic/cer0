@@ -1,9 +1,8 @@
 import React from "react";
 import Report from "../../utils/generate-reports";
 import { IProducts } from "../../types/interface.products"
-import { Button } from "../../components/labels";
-import { pageBack } from "../../utils/handlers";
 import style from "../../styles/pages/pages.module.css"
+
 const Reports: React.FC = () => {
     const columns = [ "_id", "Name", "Brand", "Price", "Description", "Stock", "Create At" ];
 

@@ -27,11 +27,6 @@ const Navbar: React.FC = () => {
           Users
         </Link>
         <Link
-          to="/contacts"
-          onClick={toggleNav}>
-          Contacts
-        </Link>
-        <Link
           to="/login"
           onClick={toggleNav}
           className={style[ 'log-in' ]}>

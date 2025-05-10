@@ -89,7 +89,7 @@ const Signup: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const signUpURL: string = config.signUpURL;
+    const signUpURL: string = 'http://localhost:3001/api/v0/sign-up';
     const errorValidation = handleErrors();
     setError(errorValidation);
     setResponse('');

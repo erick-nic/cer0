@@ -3,10 +3,8 @@ import style from "../../styles/pages/pages.module.css"
 import IUsers from "../../types/interface.user";
 import useFetchData from "../../hooks/useFetchData";
 import Cards from "../../components/cards";
-import Reports from "../products/reports";
-import ReportsUsers from "../users/user.report";
 import { Button } from "../../components/labels";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { pageBack } from "../../utils/handlers";
 
 const Users = () => {
@@ -21,12 +19,12 @@ const Users = () => {
         },
     });
 
-    function updateUser(_id: string | undefined) {
-        throw new Error("Function not implemented.");
+    const updateUser = async (id: string) => {
+        navigate(`/users/update/${id}`);
     }
 
-    function deleteUser(_id: string | undefined) {
-        throw new Error("Function not implemented.");
+    const deleteUser = async (id: string) => {
+        navigate(`/users/delete/${id}`);
     }
 
     return (
@@ -56,15 +54,17 @@ const Users = () => {
                                 <p>Password: {data.password}</p>
                                 <p>Phone: {data.phone}</p>
                                 <div className={style[ 'buttons' ]}>
-                                    <Button onClick={() => updateUser(data?._id)} value="Update" />
-                                    <Button onClick={() => deleteUser(data?._id)} value="Delete" />
+                                    <Button onClick={() => data._id && updateUser(data._id)} value="Update" />
+                                    <Button onClick={() => data._id && deleteUser(data._id)} value="Delete" />
                                 </div>
                             </Cards>
                         ))}
                     </div>
                 )}
+                <Outlet />
             </div>
         </div>
     )
 }
+
 export default Users;

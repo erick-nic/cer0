@@ -22,9 +22,9 @@ const Products: React.FC = () => {
     } = useProductNavigation();
 
     const { data, error, loading, message } = useFetchData<IProducts>('http://localhost:3001/api/v1/get-products/');
-        
+
     return (
-        <div className={style['pages']}>
+        <div className={style[ 'pages' ]}>
             {!isDetailsPage && !isReportPage && !isReportPage && (
                 <div>
                     <div>
@@ -40,23 +40,22 @@ const Products: React.FC = () => {
                     )}
                     {error && (
                         <Cards>
-                            {error}
                             {message}
                         </Cards>
                     )}
                     {data && (
-                        <div className={style['cards-container']}>
+                        <div className={style[ 'cards-container' ]}>
                             {data.map((data: IProducts) => (
                                 <Cards key={data._id}>
                                     <img
-                                        src={data.images ? data.images[0] : undefined}
+                                        src={data.images ? data.images[ 0 ] : undefined}
                                         alt={data.description}
                                         onClick={() => navigateToDetails(data?._id)}
                                     />
                                     <p>Name: {data.name}</p>
-                                    <p>Brand: {data.brand}</p>
                                     <p>Price: ${data.price}</p>
-                                    <div className={style['buttons']}>
+                                    <p>Stock: {data.stock}</p>
+                                    <div className={style[ 'buttons' ]}>
                                         <Button onClick={() => navigateToUpdateProduct(data?._id)} value="Update" />
                                         <Button onClick={() => navigateToDeleteProduct(data?._id)} value="Delete" />
                                     </div>

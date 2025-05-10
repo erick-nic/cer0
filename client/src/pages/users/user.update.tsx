@@ -1,15 +1,14 @@
-import { useParams } from "react-router-dom";
-import style from "../../styles/pages/absolute-pages.module.css";
-import { useState } from "react";
-import { IProducts } from "../../types/interface.products";
-import { Button, Input } from "./../../components/labels";
-import Cards from "../../components/cards";
-import { X } from "lucide-react";
-import { pageBack, pageReload } from "../../utils/handlers";
-import { useNavigate } from "react-router-dom";
-import useFetchData from "../../hooks/useFetchData";
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { IProducts } from '../../types/interface.products';
+import { Button, Input } from '../../components/labels';
+import Cards from '../../components/cards';
+import { X } from 'lucide-react';
+import { pageBack } from '../../utils/handlers';
+import useFetchData from '../../hooks/useFetchData';
+import style from '../../styles/pages/absolute-pages.module.css';
 
-const Update: React.FC = () => {
+const UpdateUser = () => {
     const initialState: IProducts = {
         name: '',
         description: '',
@@ -24,29 +23,30 @@ const Update: React.FC = () => {
     };
 
     const { id } = useParams<{ id: string }>();
-    const URL = `http://localhost:3001/api/v1/update-products/${id}`;
+    const URL = `http://localhost:3001/api/v0/update-user/${id}`;
     const navigate = useNavigate();
 
-    const [ products, setProducts ] = useState<IProducts>(initialState);
-    const { data, loading, error } = useFetchData<IProducts[]>(`http://localhost:3001/api/v1/get-products`);
+    const [ user, setUser ] = useState<IProducts>(initialState);
+    const { data, loading, error } = useFetchData<IProducts[]>(`http://localhost:3001/api/v0/users/`);
     const [ message, setMessage ] = useState<string | null>(null);
 
     if (data && !loading && !error) {
-        const product = data.find((p) => p._id === id);
-        if (product && products._id !== product._id) {
-            setProducts(product);
+        const userData = data.find((u) => u._id === id);
+        if (userData && user._id !== userData._id) {
+            setUser(userData);
         }
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setProducts({ ...products, [ name ]: value });
+        setUser({ ...user, [ name ]: value });
     };
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
         const token = localStorage.getItem('token');
+        console.log(token);
         if (!token) {
             alert('No authentication token found');
             navigate('/login');
@@ -60,17 +60,17 @@ const Update: React.FC = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify(products),
+                body: JSON.stringify(user),
                 mode: 'cors',
                 credentials: 'include',
             });
 
             const responseData = await response.json();
             if (!response.ok) {
-                throw new Error(responseData.message || 'Failed to update product');
+                throw new Error(responseData.message || 'Failed to update user');
             }
 
-            setMessage(responseData.message || 'Product updated successfully!');
+            setMessage(responseData.message || 'User updated successfully!');
             setTimeout(() => {
                 pageBack();
             }, 2000);
@@ -87,54 +87,54 @@ const Update: React.FC = () => {
             <Cards>
                 <form onSubmit={handleSubmit}>
                     <X className={style[ 'close' ]} onClick={pageBack} />
-                    <label htmlFor={products._id}>Name:</label>
+                    <label htmlFor={user._id}>Name:</label>
                     <Input
                         name="name"
-                        value={products.name}
+                        value={user.name}
                         onChange={handleChange}
-                        placeholder={products.name}
+                        placeholder={user.name}
                     />
                     <label htmlFor="description">Description:</label>
                     <Input
                         name="description"
-                        value={products.description}
+                        value={user.description}
                         onChange={handleChange}
-                        placeholder={products.description}
+                        placeholder={user.description}
                     />
                     <label htmlFor="price">Price:</label>
                     <Input
                         name="price"
-                        value={products.price}
+                        value={user.price}
                         onChange={handleChange}
-                        placeholder={String(products.price)}
+                        placeholder={String(user.price)}
                     />
                     <label htmlFor="category">Category:</label>
                     <Input
                         name="category"
-                        value={products.category}
+                        value={user.category}
                         onChange={handleChange}
-                        placeholder={products.category}
+                        placeholder={user.category}
                     />
                     <label htmlFor="brand">Brand:</label>
                     <Input
                         name="brand"
-                        value={products.brand}
+                        value={user.brand}
                         onChange={handleChange}
-                        placeholder={products.brand}
+                        placeholder={user.brand}
                     />
                     <label htmlFor="images">Images:</label>
                     <Input
                         name="images"
-                        value={products.images[ 0 ]}
+                        value={user.images[ 0 ]}
                         onChange={handleChange}
-                        placeholder={products.description}
+                        placeholder={user.images[ 0 ]}
                     />
                     <label htmlFor="stock">Stock:</label>
                     <Input
                         name="stock"
-                        value={products.stock}
+                        value={user.stock}
                         onChange={handleChange}
-                        placeholder={String(products.stock)}
+                        placeholder={String(user.stock)}
                     />
                     <div className={style[ 'response' ]}>
                         {message}
@@ -146,4 +146,4 @@ const Update: React.FC = () => {
     );
 };
 
-export default Update;
+export default UpdateUser;

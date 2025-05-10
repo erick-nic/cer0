@@ -4,7 +4,6 @@
     font-size: 9pt;
     display: block;
     color: var(--darkModeText);
-    overflow: hidden;
 
     & .cards-container {
         display: grid;

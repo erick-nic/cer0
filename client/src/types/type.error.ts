@@ -6,6 +6,18 @@ export type TErrors = {
         phone?: string,
     },
     "products": {
-        description?: string
+        name?: string;
+        description?: string;
+        price?: string;
+        category?: string;
+        brand?: string;
+        stock?: string;
+        images?: string;
+        attributes?: {
+            color?: string;
+            weight?: string;
+            dimensions?: string;
+        };
+        rating?: string;
     }
 };

@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import style from "../../styles/pages/absolute-pages.module.css";
 import { pageBack } from "../../utils/handlers";
-import Cards from "../../components/cards";
 import { X } from "lucide-react";
 import { Button } from "../../components/labels";
 
@@ -27,8 +26,10 @@ const Delete: React.FC = () => {
                 mode: 'cors',
                 credentials: 'include',
             });
+            const response = await res.json();
+
             if (res.ok) {
-                alert('Product deleted successfully');
+                alert(response.message);
                 pageBack();
             } else {
                 alert('Failed to delete product');

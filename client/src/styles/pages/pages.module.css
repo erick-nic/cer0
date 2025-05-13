@@ -4,6 +4,18 @@
     font-size: 11pt;
     display: block;
     color: var(--darkModeText);
+    overflow-y: hidden;
+
+    & .tittle {
+        margin-left: 3rem;
+        font-size: 18pt;
+        font-weight: 400;
+        text-decoration: none;
+        background-image: linear-gradient(80deg, #C850C0, 38%, #09ffde);
+        background-clip: text;
+        color: transparent;
+        margin-right: 0;
+    }
 
     & .cards-container {
         display: grid;

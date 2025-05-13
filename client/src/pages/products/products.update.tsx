@@ -3,9 +3,8 @@ import style from "../../styles/pages/absolute-pages.module.css";
 import { useState } from "react";
 import { IProducts } from "../../types/interface.products";
 import { Button, Input } from "./../../components/labels";
-import Cards from "../../components/cards";
 import { X } from "lucide-react";
-import { pageBack, pageReload } from "../../utils/handlers";
+import { pageBack } from "../../utils/handlers";
 import { useNavigate } from "react-router-dom";
 import useFetchData from "../../hooks/useFetchData";
 
@@ -84,64 +83,62 @@ const Update: React.FC = () => {
 
     return (
         <div className={style[ 'pages' ]}>
-            <Cards>
-                <form onSubmit={handleSubmit}>
-                    <X className={style[ 'close' ]} onClick={pageBack} />
-                    <label htmlFor={products._id}>Name:</label>
-                    <Input
-                        name="name"
-                        value={products.name}
-                        onChange={handleChange}
-                        placeholder={products.name}
-                    />
-                    <label htmlFor="description">Description:</label>
-                    <Input
-                        name="description"
-                        value={products.description}
-                        onChange={handleChange}
-                        placeholder={products.description}
-                    />
-                    <label htmlFor="price">Price:</label>
-                    <Input
-                        name="price"
-                        value={products.price}
-                        onChange={handleChange}
-                        placeholder={String(products.price)}
-                    />
-                    <label htmlFor="category">Category:</label>
-                    <Input
-                        name="category"
-                        value={products.category}
-                        onChange={handleChange}
-                        placeholder={products.category}
-                    />
-                    <label htmlFor="brand">Brand:</label>
-                    <Input
-                        name="brand"
-                        value={products.brand}
-                        onChange={handleChange}
-                        placeholder={products.brand}
-                    />
-                    <label htmlFor="images">Images:</label>
-                    <Input
-                        name="images"
-                        value={products.images[ 0 ]}
-                        onChange={handleChange}
-                        placeholder={products.description}
-                    />
-                    <label htmlFor="stock">Stock:</label>
-                    <Input
-                        name="stock"
-                        value={products.stock}
-                        onChange={handleChange}
-                        placeholder={String(products.stock)}
-                    />
-                    <div className={style[ 'response' ]}>
-                        {message}
-                    </div>
-                    <Button type="submit" value="Update" />
-                </form>
-            </Cards>
+            <form onSubmit={handleSubmit}>
+                <X className={style[ 'close' ]} onClick={pageBack} />
+                <label htmlFor={products._id}>Name:</label>
+                <Input
+                    name="name"
+                    value={products.name}
+                    onChange={handleChange}
+                    placeholder={products.name}
+                />
+                <label htmlFor="description">Description:</label>
+                <Input
+                    name="description"
+                    value={products.description}
+                    onChange={handleChange}
+                    placeholder={products.description}
+                />
+                <label htmlFor="price">Price:</label>
+                <Input
+                    name="price"
+                    value={products.price}
+                    onChange={handleChange}
+                    placeholder={String(products.price)}
+                />
+                <label htmlFor="category">Category:</label>
+                <Input
+                    name="category"
+                    value={products.category}
+                    onChange={handleChange}
+                    placeholder={products.category}
+                />
+                <label htmlFor="brand">Brand:</label>
+                <Input
+                    name="brand"
+                    value={products.brand}
+                    onChange={handleChange}
+                    placeholder={products.brand}
+                />
+                <label htmlFor="images">Images:</label>
+                <Input
+                    name="images"
+                    value={products.images[ 0 ]}
+                    onChange={handleChange}
+                    placeholder={products.description}
+                />
+                <label htmlFor="stock">Stock:</label>
+                <Input
+                    name="stock"
+                    value={products.stock}
+                    onChange={handleChange}
+                    placeholder={String(products.stock)}
+                />
+                <div className={style[ 'response' ]}>
+                    {message}
+                </div>
+                <Button type="submit" value="Update" />
+            </form>
         </div>
     );
 };

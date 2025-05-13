@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import style from "../../styles/pages/absolute-pages.module.css";
 import { pageBack } from "../../utils/handlers";
 import Cards from "../../components/cards";
@@ -8,13 +8,14 @@ import { Button } from "../../components/labels";
 const DeleteUser: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const URL = `http://localhost:3001/api/v0/delete-user/${id}`;
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         const token = localStorage.getItem('token');
 
         if (!token) {
-            alert('No authentication token found');
+            navigate('/login');
             return;
         }
 
@@ -28,11 +29,18 @@ const DeleteUser: React.FC = () => {
                 mode: 'cors',
                 credentials: 'include',
             });
-            if (res.ok) {
-                alert('User deleted successfully');
-                pageBack();
-            } else {
-                alert('Failed to delete user');
+            const result = await res.json();
+
+            if (result.message === 'Token expired') {
+                localStorage.removeItem('token');
+                navigate('/login');
+                return null;
+            }
+
+            if (result.message === 'Unauthorized') {
+                localStorage.removeItem('token');
+                navigate('/login');
+                return null;
             }
         } catch (error) {
             console.error('Error deleting user:', error);
@@ -47,9 +55,9 @@ const DeleteUser: React.FC = () => {
                     onClick={pageBack}
                 />
                 <form>
-                    <label htmlFor="delete">
+                    <p>
                         Are you sure you want to delete this user?
-                    </label>
+                    </p>
                     <Button
                         value="Delete"
                         onClick={handleSubmit}

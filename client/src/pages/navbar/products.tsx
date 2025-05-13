@@ -21,7 +21,7 @@ const Products: React.FC = () => {
         navigateToCreateCategory,
     } = useProductNavigation();
 
-    const { data, error, loading, message } = useFetchData<IProducts>('http://localhost:3001/api/v1/get-products/');
+    const { data, error, loading } = useFetchData<IProducts>('http://localhost:3001/api/v1/get-products/');
 
     return (
         <div className={style[ 'pages' ]}>
@@ -35,12 +35,12 @@ const Products: React.FC = () => {
                     </div>
                     {loading && (
                         <Cards>
-                            {loading}
+                            <p>Loading...</p>
                         </Cards>
                     )}
                     {error && (
                         <Cards>
-                            {message}
+                            {error}
                         </Cards>
                     )}
                     {data && (
@@ -52,9 +52,8 @@ const Products: React.FC = () => {
                                         alt={data.description}
                                         onClick={() => navigateToDetails(data?._id)}
                                     />
-                                    <p>Name: {data.name}</p>
-                                    <p>Price: ${data.price}</p>
-                                    <p>Stock: {data.stock}</p>
+                                    <p>{data.name}</p>
+                                    <p>${data.price}</p>
                                     <div className={style[ 'buttons' ]}>
                                         <Button onClick={() => navigateToUpdateProduct(data?._id)} value="Update" />
                                         <Button onClick={() => navigateToDeleteProduct(data?._id)} value="Delete" />

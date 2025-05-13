@@ -3,7 +3,7 @@
 .create-products {
     display: flex;
     flex-direction: column;
-    width: 23rem;
+    width: auto;
     font-size: 11pt;
     background-color: var(--offDarkModeBackground);
     border-radius: .03rem;

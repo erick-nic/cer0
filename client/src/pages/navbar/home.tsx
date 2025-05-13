@@ -1,7 +1,6 @@
 import React from "react";
 import useFetchData from "../../hooks/useFetchData";
 import Cards from "../../components/cards";
-// import { Button } from "../../components/labels";
 import style from "../../styles/pages/pages.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +14,9 @@ const Home: React.FC = () => {
 
     return (
         <div className={style[ 'pages' ]}>
+            <h3 className={style[ 'tittle' ]}>
+                Products Categories
+            </h3>
             {loading &&
                 <Cards>
                     <p>Loading...</p>

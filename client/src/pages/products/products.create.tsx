@@ -10,7 +10,7 @@ import { pageBack, pageReload } from "../../utils/handlers";
 import useSubmitData from "../../hooks/useSubmitData";
 import { TErrors } from "../../types/type.error";
 import Cards from "../../components/cards";
-import { Button, Input } from "../../components/labels";
+import { Button, Input, Textarea } from "../../components/labels";
 
 const Create: React.FC = () => {
     const initialState: IProducts = {
@@ -42,8 +42,42 @@ const Create: React.FC = () => {
     const [ error, setError ] = useState<TErrors[ 'products' ]>({});
     const handleErrors = () => {
         const errors: TErrors[ 'products' ] = {}
-        if (data.description.length < 10) {
-            errors.description = 'Description must be a least 10 caracters'
+        if (!data.name) {
+            errors.name = 'Name is required'
+        }
+        if (!data.price) {
+            errors.price = 'Price is required'
+        }
+
+        if (data.description.length < 1) {
+            errors.description = 'Description must be at least 10 character long'
+        }
+        if (data.category.length < 1) {
+            errors.category = 'Category is required'
+        }
+        if (data.brand.length < 1) {
+            errors.brand = 'Brand is required'
+        }
+        if (!data.stock) {
+            errors.stock = 'Stock is required'
+        }
+        if (data.images.length < 1) {
+            errors.images = 'At least one image is required'
+        }
+        if (data.images.some((image) => image.length < 1)) {
+            errors.images = 'All images must be valid URLs'
+        }
+        if (!data.attributes?.dimensions) {
+            errors.attributes = errors.attributes || {};
+            errors.attributes.color = 'Attributes color is required';
+        }
+        if (!data.attributes?.weight) {
+            errors.attributes = errors.attributes || {};
+            errors.attributes.weight = 'Weight is required';
+        }
+        if (!data.attributes?.dimensions) {
+            errors.attributes = errors.attributes || {};
+            errors.attributes.dimensions = 'Dimensions is required';
         }
         return errors
     }
@@ -62,8 +96,6 @@ const Create: React.FC = () => {
             },
             body: JSON.stringify(data),
         };
-        pageBack();
-        pageReload();
         await submitData(submitUrl, submitOptions);
     }
 
@@ -82,7 +114,7 @@ const Create: React.FC = () => {
                         required
                     />
                     <p>Description</p>
-                    <textarea
+                    <Textarea
                         name="description"
                         placeholder="Description"
                         value={data.description}
@@ -91,7 +123,7 @@ const Create: React.FC = () => {
                     />
                     <div>{error.description}</div>
                     <p>Products price</p>
-                    <input
+                    <Input
                         type="number"
                         name="price"
                         placeholder="Price"
@@ -114,7 +146,7 @@ const Create: React.FC = () => {
                         ))}
                     </select>
                     <p>Brand</p>
-                    <input
+                    <Input
                         type="text"
                         name="brand"
                         placeholder="Brand"
@@ -123,7 +155,7 @@ const Create: React.FC = () => {
                         required
                     />
                     <p>Stock</p>
-                    <input
+                    <Input
                         type="number"
                         name="stock"
                         placeholder="Stock"
@@ -148,7 +180,7 @@ const Create: React.FC = () => {
                         </button>
                     </div>
                     <p>Product color</p>
-                    <input
+                    <Input
                         type="text"
                         name="color"
                         placeholder="Color"
@@ -156,7 +188,7 @@ const Create: React.FC = () => {
                         onChange={handleAttributesChange}
                     />
                     <p>Product size</p>
-                    <input
+                    <Input
                         type="text"
                         name="weight"
                         placeholder="Weight"
@@ -164,7 +196,7 @@ const Create: React.FC = () => {
                         onChange={handleAttributesChange}
                     />
                     <p>Product dimensions</p>
-                    <input
+                    <Input
                         type="text"
                         name="dimensions"
                         placeholder="Dimensions"
@@ -173,9 +205,9 @@ const Create: React.FC = () => {
                     />
                     <Cards className={Style[ "pages" ]}>
                         {message}
+                        <Button value="Save" onClick={handleSubmit} />
+                        <Button value="Cancel" onClick={pageBack} />
                     </Cards>
-                       <Button value="Save" onClick={handleSubmit}/>
-                       <Button value="Cancel" onClick={pageBack}/>
                 </form>
             </Cards>
         </aside >

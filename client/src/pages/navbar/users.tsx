@@ -1,36 +1,49 @@
-import style from "../../styles/pages/pages.module.css"
+import style from "../../styles/pages/pages.module.css";
 import IUsers from "../../types/interface.user";
 import useFetchData from "../../hooks/useFetchData";
 import Cards from "../../components/cards";
 import { Button } from "../../components/labels";
 import { Outlet, useNavigate } from "react-router-dom";
 import { pageBack } from "../../utils/handlers";
+import { useMemo } from "react";
 
 const Users = () => {
     const URL = "http://localhost:3001/api/v0/users/";
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
-    const { data, loading, error, message } = useFetchData<IUsers>(URL, {
+    const fetchOptions = useMemo(() => ({
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        mode: 'cors',
-        credentials: 'include',
-    });
+    }), [ token ]);
+
+    const { data, loading, error, message } = useFetchData<IUsers>(URL, fetchOptions);
+
+    if (message === 'Token expired' || error === 'Token expired') {
+        localStorage.removeItem('token');
+        navigate('/login');
+        return null;
+    }
+
+    if (message === 'Unauthorized' || error === 'Unauthorized') {
+        localStorage.removeItem('token');
+        navigate('/login');
+        return null;
+    }
 
     const updateUser = async (id: string) => {
         navigate(`/users/update/${id}`);
-    }
+    };
 
     const deleteUser = async (id: string) => {
         navigate(`/users/delete/${id}`);
-    }
+    };
 
     const report = async () => {
         navigate(`/users/reports`);
-    }
+    };
 
     return (
         <div className={style[ 'pages' ]}>
@@ -41,13 +54,12 @@ const Users = () => {
                 </div>
                 {loading && (
                     <Cards>
-                        {loading}
+                        <p>Loading...</p>
                     </Cards>
                 )}
-                {error && (
+                {!loading && error && (
                     <Cards>
                         {error}
-                        {message}
                     </Cards>
                 )}
                 {data && (
@@ -71,8 +83,8 @@ const Users = () => {
                         ))}
                     </div>
                 )}
-                </div>
-                <Outlet />
+            </div>
+            <Outlet />
         </div>
     );
 };

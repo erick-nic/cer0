@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-interface FetchOptions extends RequestInit {}
+interface FetchOptions extends RequestInit { }
 
 const useFetchData = <T>(url: string, options?: FetchOptions) => {
   const [data, setData] = useState<T | null>(null);
@@ -15,7 +15,12 @@ const useFetchData = <T>(url: string, options?: FetchOptions) => {
       try {
         setLoading(true);
         const response = await fetch(url, options);
-        if (!response.ok) throw new Error("Error fetching data");
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          const serverErrorMessage = errorData?.message || "Error fetching data";
+          throw new Error(serverErrorMessage);
+        }
 
         const result: T = await response.json();
         if ((result as any).message) {
@@ -24,13 +29,14 @@ const useFetchData = <T>(url: string, options?: FetchOptions) => {
         setData(result);
       } catch (err) {
         setError((err as Error).message);
+        console.error("Fetch error:", (err as Error).message);
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [url]);
+  }, [url, options]);
 
   return { data, loading, error, message };
 };

@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import style from "../../styles/pages/absolute-pages.module.css";
 import { pageBack } from "../../utils/handlers";
-import Cards from "../../components/cards";
 import { X } from "lucide-react";
 import { Button } from "../../components/labels";
 
@@ -30,6 +29,10 @@ const DeleteUser: React.FC = () => {
                 credentials: 'include',
             });
             const result = await res.json();
+            if (res.ok) {
+                alert(result.message);
+                navigate('/users');
+            }
 
             if (result.message === 'Token expired') {
                 localStorage.removeItem('token');
@@ -49,7 +52,6 @@ const DeleteUser: React.FC = () => {
 
     return (
         <div className={style[ 'pages' ]}>
-            <Cards>
                 <X
                     className={style[ 'close' ]}
                     onClick={pageBack}
@@ -64,7 +66,6 @@ const DeleteUser: React.FC = () => {
                         type="submit"
                     />
                 </form>
-            </Cards>
         </div>
     )
 }

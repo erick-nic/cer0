@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "../../styles/navbar/login.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import IUsers from "../../types/interface.user";
 import { TErrors } from "../../types/type.error";
 import { config } from "../../config";
@@ -23,7 +23,6 @@ const Login: React.FC = () => {
   const [ data, setData ] = useState<IUsers>(initalState);
   const [ error, setError ] = useState<TErrors[ 'users' ]>({});
   const [ response, setResponse ] = useState<string>('');
-  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

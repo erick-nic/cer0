@@ -1,9 +1,9 @@
 import React from "react";
-import { FaBars, FaX } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import style from "../styles/components/navbar.module.css";
 import LogoutButton from "./logout";
 import { Button } from "./labels";
+import { Menu, X } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const navRef = React.useRef<HTMLDivElement>(null);
@@ -40,14 +40,14 @@ const Navbar: React.FC = () => {
         </Link>
         <LogoutButton />
         <Button
-          value={<FaX size={'13pt'} />}
+          value={<X />}
           onClick={toggleNav}
           className={style[ 'menu-close' ]} />
       </nav >
       <Button
         className={style[ 'menu-bars' ]}
         onClick={toggleNav}
-        value={<FaBars size={'13pt'} />}
+        value={<Menu />}
       />
     </header>
   );

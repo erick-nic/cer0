@@ -15,7 +15,7 @@ type Props = {
 const Button: React.FC<Props> = ({ name, onClick, value, className }) => {
     return (
         <button
-            className={style[ '' ] || className}
+            className={className}
             onClick={onClick}
             name={name}
         >
